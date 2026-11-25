@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-24T17:00:00Z",
+ "updated": "2026-11-25T17:26:36.693Z",
  "note": "Booska Cycle Clock event log. Never delete entries; superseded ones get status 'broken'.",
  "events": [
   {
@@ -10,7 +10,7 @@
    "block": 210000,
    "t": "2012-11-28T15:24:38Z",
    "status": "confirmed",
-   "src": "seed"
+   "src": "blockchain"
   },
   {
    "id": "halving-2",
@@ -19,7 +19,7 @@
    "block": 420000,
    "t": "2016-07-09T16:46:13Z",
    "status": "confirmed",
-   "src": "seed"
+   "src": "blockchain"
   },
   {
    "id": "halving-3",
@@ -28,7 +28,7 @@
    "block": 630000,
    "t": "2020-05-11T19:23:43Z",
    "status": "confirmed",
-   "src": "seed"
+   "src": "blockchain"
   },
   {
    "id": "halving-4",
@@ -37,7 +37,7 @@
    "block": 840000,
    "t": "2024-04-20T00:09:27Z",
    "status": "confirmed",
-   "src": "seed"
+   "src": "blockchain"
   },
   {
    "id": "top-2013",

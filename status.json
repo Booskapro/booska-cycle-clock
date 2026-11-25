@@ -1,0 +1,11 @@
+{
+ "lastWrite": "2026-11-25T17:26:36.693Z",
+ "lastRun": "2026-11-25T17:26:36.693Z",
+ "block": 977544,
+ "price": 59124,
+ "sources": {
+  "block": "mempool.space",
+  "price": "CoinGecko"
+ },
+ "changes": []
+}
