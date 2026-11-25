@@ -7,20 +7,20 @@
 <meta name="description" content="Saacadda wareegga Bitcoin oo live ah: goorma halving, top iyo bottom dhacayaan. Qaacidooyin furan, xog live ah, bilaash. Bitcoin cycle clock – halving 2028, top 2029, bottom 2030. @Booskapro">
 <meta name="keywords" content="Bitcoin halving 2028, Bitcoin cycle clock, wareegga Bitcoin, saacadda Bitcoin, BTC bottom, BTC top 2029, halving countdown, crypto Soomaali, Booskapro">
 <meta name="author" content="@Booskapro">
-<link rel="canonical" href="https://booska-cycle-clock.vercel.app/">
+<link rel="canonical" href="https://booskaclock.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Booska Cycle Clock">
 <meta property="og:title" content="Booska Cycle Clock · Saacadda wareegga Bitcoin">
 <meta property="og:description" content="Live: halving, top iyo bottom-ka Bitcoin – qaacidooyin furan. @Booskapro">
-<meta property="og:url" content="https://booska-cycle-clock.vercel.app/">
-<meta property="og:image" content="https://booska-cycle-clock.vercel.app/og.png">
+<meta property="og:url" content="https://booskaclock.vercel.app/">
+<meta property="og:image" content="https://booskaclock.vercel.app/og.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@Booskapro"><meta name="twitter:creator" content="@Booskapro">
 <meta name="twitter:title" content="Booska Cycle Clock · Saacadda wareegga Bitcoin">
 <meta name="twitter:description" content="Live: halving, top iyo bottom-ka Bitcoin – qaacidooyin furan.">
-<meta name="twitter:image" content="https://booska-cycle-clock.vercel.app/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Booska Cycle Clock","url":"https://booska-cycle-clock.vercel.app/","applicationCategory":"FinanceApplication","operatingSystem":"Any","inLanguage":["so","en"],"isAccessibleForFree":true,"creator":{"@type":"Person","name":"Booskapro","url":"https://x.com/Booskapro"},"license":"https://creativecommons.org/licenses/by/4.0/","description":"Live Bitcoin cycle clock: halving, top and bottom timing with open formulas."}</script>
+<meta name="twitter:image" content="https://booskaclock.vercel.app/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Booska Cycle Clock","url":"https://booskaclock.vercel.app/","applicationCategory":"FinanceApplication","operatingSystem":"Any","inLanguage":["so","en"],"isAccessibleForFree":true,"creator":{"@type":"Person","name":"Booskapro","url":"https://x.com/Booskapro"},"license":"https://creativecommons.org/licenses/by/4.0/","description":"Live Bitcoin cycle clock: halving, top and bottom timing with open formulas."}</script>
 <meta name="theme-color" content="#0B0E14">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F7931A'/%3E%3Ctext x='32' y='43' font-size='32' font-family='Arial' font-weight='700' text-anchor='middle' fill='%23141414'%3EB%3C/text%3E%3C/svg%3E">
 <style>:root{
@@ -300,6 +300,19 @@ body{overflow-x:clip}
   #priceCard .pw-exp{display:grid}
 }
 .pw-exp{display:none;position:absolute;right:8px;bottom:8px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--card2);color:var(--tx);place-items:center;font-size:16px;z-index:4}
+
+/* v7: phone polish */
+#clockCard{display:flex;flex-direction:column;justify-content:center}
+.rng{font-size:.85em;color:var(--mu);font-weight:600;margin-left:6px}
+@media (max-width:700px){
+  .strip .long{display:none}
+  #clockCard{padding:6px}
+  #priceCard .pw-exp{top:10px;right:10px;bottom:auto;width:30px;height:30px;font-size:14px}
+  #priceCard .pw-h{padding-right:34px}
+  .clk-mini .hr-minor,.clk-mini .dlab,.clk-mini .evlab{display:none}
+}
+.hideL{display:none}@media (max-width:700px){.hideL{display:inline}}
+@media (max-width:700px){#priceCard .abs{display:none}#priceCard .pw-c{white-space:nowrap}}
 </style>
 </head>
 <body>
@@ -1095,11 +1108,11 @@ function clockSVG(){
   s+=wedge(M.topWin[0],M.topWin[1],"var(--rd)")+wedge(M.botWin[0],M.botWin[1],"var(--gr)");
   for(let k=0;k<24;k++){const maj=k%3===0,[x1,y1]=P(k,maj?344:342),[x2,y2]=P(k,maj?364:352),[tx,ty]=P(k,R-(maj?36:44));
     s+=`<line x1="${f(x1)}" y1="${f(y1)}" x2="${f(x2)}" y2="${f(y2)}" stroke="${maj?"var(--or)":"var(--mu2)"}" stroke-width="${maj?3:1.5}"/>`;
-    s+=`<text x="${f(tx)}" y="${f(ty)}" text-anchor="middle" dominant-baseline="central" font-size="${maj?24:15}" font-weight="${maj?700:400}" fill="${maj?"var(--tx)":"var(--mu)"}">${String(k).padStart(2,"0")}</text>`;}
+    s+=`<text class="${maj?"":"hr-minor"}" x="${f(tx)}" y="${f(ty)}" text-anchor="middle" dominant-baseline="central" font-size="${maj?24:15}" font-weight="${maj?700:400}" fill="${maj?"var(--tx)":"var(--mu)"}">${String(k).padStart(2,"0")}</text>`;}
   for(let k=0;k<24;k+=3){const[x,y]=P(k,382);const ms=dateAt(base+k/24*HALVING_BLOCKS);
-    s+=`<text x="${f(x)}" y="${f(y)}" text-anchor="middle" dominant-baseline="central" font-size="14" fill="var(--mu)">${(ms>nowMs()?"~":"")+mstr(ms)}</text>`;}
+    s+=`<text class="dlab" x="${f(x)}" y="${f(y)}" text-anchor="middle" dominant-baseline="central" font-size="14" fill="var(--mu)">${(ms>nowMs()?"~":"")+mstr(ms)}</text>`;}
   // SIMPLE (default): only this cycle, labelled on the track · HISTORY: one ring per past cycle · ALL: + first lows and relief rallies
-  const lbl=(hh,r,txt1,txt2,col)=>{const[x,y]=P(hh,r);const right=x>=C;return`<text x="${f(x+(right?-12:12))}" y="${f(y-4)}" text-anchor="${right?"end":"start"}" font-size="16" font-weight="700" fill="${col}">${txt1}</text><text x="${f(x+(right?-12:12))}" y="${f(y+15)}" text-anchor="${right?"end":"start"}" font-size="13" fill="var(--mu)">${txt2}</text>`;};
+  const lbl=(hh,r,txt1,txt2,col)=>{const[x,y]=P(hh,r);const right=x>=C;return`<text class="evlab" x="${f(x+(right?-12:12))}" y="${f(y-4)}" text-anchor="${right?"end":"start"}" font-size="16" font-weight="700" fill="${col}">${txt1}</text><text class="evlab" x="${f(x+(right?-12:12))}" y="${f(y+15)}" text-anchor="${right?"end":"start"}" font-size="13" fill="var(--mu)">${txt2}</text>`;};
   const lc=M.ev.find(c=>c.n===n);
   {const[x,y]=P(0,R);s+=`<circle cx="${f(x)}" cy="${f(y)}" r="9" fill="var(--or)" stroke="var(--clock-bg)" stroke-width="3"><title>Halving ${n}</title></circle>`;}
   if(lc){const tr_=lc.top,bt=lc.bot,ht=(blockAt(tr_.t)-n*HALVING_BLOCKS)/HALVING_BLOCKS*24,hb=(blockAt(bt.t)-n*HALVING_BLOCKS)/HALVING_BLOCKS*24;
@@ -1130,13 +1143,13 @@ const CD=[];
 function renderDash(){
   const b=curBlock(),n=Math.floor(b/HALVING_BLOCKS),base=n*HALVING_BLOCKS,h=(b-base)/HALVING_BLOCKS*24;
   const hms=halvingMs(n),days=(nowMs()-hms)/DAY,[ph,col]=phaseOf(h,true),F=forecast();
-  $("clock").innerHTML=clockSVG();
+  $("clock").innerHTML=clockSVG();$("clock").classList.toggle("clk-mini",window.matchMedia("(max-width:700px)").matches);
   $("fClock").textContent=`${L("Saacad","Time")} = (${nf(b)} − ${nf(base)}) ÷ 210,000 × 24 = ${h.toFixed(2)} → ${hm(h)}`;
   $("clkLeg").innerHTML=`<div class="seg" id="clkSeg">${[["simple",L("Wareeggan","This cycle")],["history",L("+ Kuwii hore","+ Past")],["all",L("+ Dhammaan","+ All")]].map(m=>`<button data-m="${m[0]}" class="${CLK_MODE===m[0]?"on":""}">${m[1]}</button>`).join("")}</div>`+
     `<div class="legend" style="justify-content:center;margin-top:8px"><span><b style="color:var(--or)">●</b> Halving</span><span><b style="color:var(--rd)">●</b> Top</span><span><b style="color:var(--gr)">●</b> Low</span><span><b style="color:var(--gr)">◐</b> ${t("es_suspected")}</span><span><b style="color:var(--rd);opacity:.5">▮</b> ${L("Daaqadda top","Top window")}</span><span><b style="color:var(--gr);opacity:.5">▮</b> ${L("Daaqadda bottom","Bottom window")}</span></div>`;
   $("clkSeg").onclick=e=>{const m=e.target.dataset.m;if(!m)return;CLK_MODE=m;renderDash();};
   const dl=Math.floor((F.h5-nowMs())/DAY);
-  $("strip").innerHTML=`<span class="orc">${hm(h)}</span><span class="sd">·</span><span style="color:${col}">${t("ph_"+ph)}</span><span class="sd">·</span>Halving ${n+1}: <b>${nf(dl)}</b> ${L("maalmood","days")}<span class="sd hideS">·</span><span class="hideS">${L("Maalin","Day")} ${nf(Math.floor(days))} · ${((b-base)/HALVING_BLOCKS*100).toFixed(1)}% · Block ${nf(b)}</span>`;
+  $("strip").innerHTML=`<span class="orc">${hm(h)}</span><span class="sd">·</span><span style="color:${col}">${t("ph_"+ph)}</span><span class="sd">·</span>Halving ${n+1}: <b>${nf(dl)}</b> <span class="long">${L("maalmood","days")}</span><span class="hideL">${L("m","d")}</span><span class="sd hideS">·</span><span class="hideS">${L("Maalin","Day")} ${nf(Math.floor(days))} · ${((b-base)/HALVING_BLOCKS*100).toFixed(1)}% · Block ${nf(b)}</span>`;
   // countdowns
   const hd=F.h5,lt=(a,b2)=>`${dstr(a)} – ${dstr(b2)}`;
   const cds=[{k:"h",lab:"Halving "+F.n,c:"var(--or)",to:F.h5,date:dstr(F.h5),sub:`~${String(new Date(F.h5).getUTCHours()).padStart(2,"0")}:${String(new Date(F.h5).getUTCMinutes()).padStart(2,"0")} UTC`,clk:"00:00",
@@ -1197,7 +1210,7 @@ function renderArchive(){
   const led=ARCH.rows.slice(-30).reverse();
   $("ledTbl").innerHTML=led.length?`<tr><th>${L("Taariikh","Date")}</th><th>Block</th><th>${L("Saacad","Clock")}</th><th>${L("Qiime","Price")}</th><th>Halving</th><th>Top</th><th>Bottom</th><th>Top $</th><th>Signal</th></tr>`+led.map(r=>`<tr><td>${r.date}</td><td>${nf(+r.block)}</td><td>${r.clock}</td><td>${usd(+r.price)}</td><td>${r.halving_next}</td><td>${r.top_next}</td><td>${r.bottom_next}</td><td>${usdK(+r.top_lo)}–${usdK(+r.top_hi)}</td><td>${r.signal}</td></tr>`).join("")
     :`<tr><td class="muc">${L("Saf ma jiro weli – robot-ka ayaa bilaabaya marka la shido.","No rows yet – the robot starts writing once it is switched on.")}</td></tr>`;
-  $("arDl").innerHTML=[["history.csv","data/history.csv"],["events.json","data/events.json"],["weekly.json","data/weekly.json"]].map(x=>`<a class="pill" href="${x[1]}" target="_blank" rel="noopener">⬇ ${x[0]}</a>`).join("");
+  $("arDl").innerHTML=[["history.csv","history.csv"],["events.json","events.json"],["weekly.json","weekly.json"]].map(x=>`<a class="pill" href="${x[1]}" target="_blank" rel="noopener">⬇ ${x[0]}</a>`).join("");
   showDay();}
 function showDay(){const el=$("arDate");if(!el)return;if(!el.value)el.value=iso(nowMs());const d=el.value,ms=ymd(d);
   const r=ARCH.rows.find(x=>x.date===d);let html="";
@@ -1220,7 +1233,7 @@ function connectWS(){try{WS=new WebSocket("wss://mempool.space/api/v1/ws");
   WS.onopen=()=>{wsTry=0;WS.send(JSON.stringify({action:"init"}));WS.send(JSON.stringify({action:"want",data:["blocks"]}));};
   WS.onmessage=m=>{try{const j=JSON.parse(m.data);const bl=j.block||(Array.isArray(j.blocks)&&j.blocks[j.blocks.length-1]);if(bl&&bl.height)onBlock(bl.height);}catch(e){}};
   WS.onclose=()=>{wsTry++;if(wsTry<8)setTimeout(connectWS,Math.min(60000,3000*wsTry));};WS.onerror=()=>{try{WS.close();}catch(e){}};}catch(e){}}
-async function loadArchive(){const get=async(f,txt)=>{try{const r=await fetch("data/"+f,{cache:"no-store"});if(!r.ok)return null;return txt?r.text():r.json();}catch(e){return null;}};
+async function loadArchive(){const get=async(f,txt)=>{try{const r=await fetch(f,{cache:"no-store"});if(!r.ok)return null;return txt?r.text():r.json();}catch(e){return null;}};
   const[w,e,h,st]=await Promise.all([get("weekly.json"),get("events.json"),get("history.csv",1),get("status.json")]);
   let ch=false;
   if(Array.isArray(w)&&w.length>100){for(const r of w){const o={t:ymd(r[0]),o:r[1],h:r[2],l:r[3],c:r[4]};const i=S.weekly.findIndex(x=>x.t===o.t);if(i>=0)S.weekly[i]=o;else S.weekly.push(o);}S.weekly.sort((a,b)=>a.t-b.t);ch=true;}
@@ -1473,7 +1486,7 @@ function pcMarkup(full){return`<div class="pw-h"><div class="pw-t"><span class="
   <div class="pw-ch"><div class="pw-chart"></div><div class="pw-tip"></div><div class="pw-hi"></div><div class="pw-lo"></div></div>
   ${full?"":`<button class="pw-exp" aria-label="open">⤢</button>`}<div class="pw-r">${RANGES.map(r=>`<button data-r="${r.k}" class="${PC.range===r.k?"on":""}">${L(r.so,r.en)}</button>`).join("")}</div><div class="pw-n cs"></div>`;}
 function pcMount(el,full){el.innerHTML=pcMarkup(full);const ch=el.querySelector(".pw-chart");
-  const c=LW.createChart(ch,{autoSize:true,watermark:{visible:true,text:"@Booskapro",fontSize:13,color:"rgba(247,147,26,0.25)",horzAlign:"right",vertAlign:"bottom"},layout:{background:{type:"solid",color:"transparent"},textColor:cssv("--mu"),attributionLogo:false,fontFamily:cssv("--font")},
+  const c=LW.createChart(ch,{autoSize:true,watermark:{visible:full||!window.matchMedia("(max-width:700px)").matches,text:"@Booskapro",fontSize:13,color:"rgba(247,147,26,0.25)",horzAlign:"left",vertAlign:"top"},layout:{background:{type:"solid",color:"transparent"},textColor:cssv("--mu"),attributionLogo:false,fontFamily:cssv("--font")},
     grid:{vertLines:{visible:false},horzLines:{visible:false}},rightPriceScale:{visible:false,scaleMargins:{top:0.16,bottom:0.1}},leftPriceScale:{visible:false},
     timeScale:{visible:false,borderVisible:false,fixLeftEdge:true,fixRightEdge:true},handleScroll:false,handleScale:false,
     crosshair:{mode:1,vertLine:{color:"#8a8f99",width:1,style:2,labelVisible:false},horzLine:{visible:false,labelVisible:false}},trackingMode:{exitMode:0}});
@@ -1491,7 +1504,7 @@ function pcMount(el,full){el.innerHTML=pcMarkup(full);const ch=el.querySelector(
   new ResizeObserver(()=>requestAnimationFrame(()=>pcLabels(w))).observe(ch);
   PC.W.push(w);return w;}
 function pcHeader(){const b=PC.bars;if(!b.length)return;const first=b[0].o||b[0].c,last=S.price||b[b.length-1].c,d=last-first,p=d/first*100,col=d>=0?"var(--gr)":"var(--rd)";
-  for(const w of PC.W){w.el.querySelector(".pw-p").textContent=nf(last);const c=w.el.querySelector(".pw-c");c.textContent=`${p>=0?"+":"−"}${Math.abs(p).toFixed(2)}% (${d>=0?"+":"−"}${nf(Math.abs(d))})`;c.style.color=col;
+  for(const w of PC.W){w.el.querySelector(".pw-p").textContent=nf(last);const c=w.el.querySelector(".pw-c");c.innerHTML=`${p>=0?"+":"−"}${Math.abs(p).toFixed(2)}%<span class="abs"> (${d>=0?"+":"−"}${nf(Math.abs(d))})</span><span class="rng">· ${L(rangeOf(PC.range).so,rangeOf(PC.range).en)}</span>`;c.style.color=col;
     const dot=w.el.querySelector(".pw-t .dot");dot&&(dot.className="dot"+(S.liveP?" on":""));w.el.querySelector(".pw-n").textContent=PC.note;
     w.el.querySelectorAll(".pw-r button").forEach(x=>x.classList.toggle("on",x.dataset.r===PC.range));w.el.querySelectorAll(".pw-ty button").forEach(x=>x.classList.toggle("on",x.dataset.ty===PC.type));}}
 function pcLabels(w){const b=PC.bars;if(!b.length)return;const s=PC.type==="line"?w.area:w.cand;
