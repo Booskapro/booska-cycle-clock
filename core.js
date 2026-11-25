@@ -28,7 +28,7 @@ const T={so:{
  ab_src:"Halka xogtu ka timaado",ab_open:"Fur saacadda →",
  priv_t:"<h3>Privacy</h3><p>Cusboonaysiintii u dambeysay: 23 Nov 2026.</p><p>Booska Cycle Clock <b>akoon ma laha</b>, email ma ururiyo, mana isticmaalo cookies raad-raac ah ama xayeysiis.</p><p>Doorashada luqadda (SO/EN) waxaa lagu kaydiyaa browser-kaaga oo keliya (localStorage).</p><p>Si xogta live ah loo helo, browser-kaagu wuxuu si toos ah ula xiriiraa mempool.space, blockstream.info, CoinGecko, Binance iyo Coinbase. Adeegyadaas waxay arki karaan IP-gaaga sida bog kasta oo internet ah; siyaasadahooda ayaa khuseeya.</p><p>Bogga waxaa martigeliya GitHub Pages, kaas oo kaydin kara log caadi ah (sida IP) sababo amni awgood.</p>",
  terms_t:"<h3>Terms</h3><p><b>Waxbarasho keliya.</b> Wax kasta oo halkan ku jira waa macluumaad iyo waxbarasho – ma aha talo maaliyadeed, maalgashi ama canshuur.</p><p><b>Saxnaanta.</b> Xogta waxaa laga keenaa ilo dadweyne; way daahi kartaa, dhiman kartaa ama qaldami kartaa. Saadaasha waa qaab taariikheed, ma aha ballan.</p><p><b>Damaanad ma jirto.</b> Adeegga waxaa la bixiyaa sida uu yahay. Khasaare kasta oo ka yimaada isticmaalka xogtan mas'uul kama nihin.</p><p>Su'aalo: <a href='https://x.com/Booskapro' target='_blank' rel='noopener'>@Booskapro</a></p>",
- live:"Live",offline:"Xog kaydsan",go_now:"Hadda",k_time:"Waqtiga wareegga Bitcoin",clk_s:"Gacanta = maanta (block-ga live ah) · 24 saac = hal wareeg",tl_t:"Jadwalka wareegyada",tl_s:"",feed_t:"Dhacdooyinka u dambeeyay",feed_s:"",ct_t:"Waqtiga wareeg kasta",ct_s:"Maalmaha halving kaddib iyo saacadda wareegga",
+ live:"Live",offline:"Xog kaydsan",cm_s:"Labo far ku weynee · dhibic kasta waa top ama bottom wareeg hore",go_now:"Hadda",k_time:"Waqtiga wareegga Bitcoin",clk_s:"Gacanta = maanta (block-ga live ah) · 24 saac = hal wareeg",tl_t:"Jadwalka wareegyada",tl_s:"",feed_t:"Dhacdooyinka u dambeeyay",feed_s:"",ct_t:"Waqtiga wareeg kasta",ct_s:"Maalmaha halving kaddib iyo saacadda wareegga",
  n_arch:"Kaydka",ar_h:"Diiwaanka live ah – waxba lama tirtiro",ar_lead:"Block kasta iyo qiime kasta waa la hubiyaa. Dhacdo kasta (halving, top, bottom) isla markiiba way is calaamadaysaa, robot-ka kaydkuna (GitHub Actions) 10 daqiiqo kasta ayuu xogta ku kaydiyaa – sannado kaddib waa la heli karaa.",
  ar_ev:"Dhammaan dhacdooyinka",ar_ev_s:"",ar_day:"Raadi maalin",ar_day_s:"Dooro taariikh – arag xogtii iyo saadaashii maalintaas.",ar_dl:"Soo deji xogta",ar_dl_s:"Xogta oo dhan waa furan (CC BY 4.0). Excel ama Python ku fur.",
  ar_led:"Saadaasha maalin kasta (forecast ledger)",ar_led_s:"Sida saadaashu isu beddeshay maalin kasta – caddayn aan la beddeli karin.",
@@ -64,7 +64,7 @@ const T={so:{
  ab_src:"Where the numbers come from",ab_open:"Open the clock →",
  priv_t:"<h3>Privacy</h3><p>Last updated: 23 Nov 2026.</p><p>Booska Cycle Clock has <b>no accounts</b>, collects no email, and uses no tracking cookies or ads.</p><p>Your language choice (SO/EN) is stored only in your browser (localStorage).</p><p>For live data your browser connects directly to mempool.space, blockstream.info, CoinGecko, Binance and Coinbase. Like any website they can see your IP address; their policies apply.</p><p>The site is hosted on GitHub Pages, which may keep standard logs (such as IP) for security.</p>",
  terms_t:"<h3>Terms</h3><p><b>Education only.</b> Everything here is information and education – not financial, investment or tax advice.</p><p><b>Accuracy.</b> Data comes from public sources and may be delayed, missing or wrong. Forecasts are a historical pattern, not a promise.</p><p><b>No warranty.</b> The service is provided as is. We are not liable for losses from using this data.</p><p>Questions: <a href='https://x.com/Booskapro' target='_blank' rel='noopener'>@Booskapro</a></p>",
- live:"Live",offline:"Cached data",go_now:"Now",k_time:"Bitcoin cycle time",clk_s:"Hand = today (live block) · 24 hours = one cycle",tl_t:"Cycle timeline",tl_s:"",feed_t:"Latest events",feed_s:"",ct_t:"Timing of every cycle",ct_s:"Days after halving and the cycle clock time",
+ live:"Live",offline:"Cached data",cm_s:"Pinch to zoom · each dot is a past top or bottom",go_now:"Now",k_time:"Bitcoin cycle time",clk_s:"Hand = today (live block) · 24 hours = one cycle",tl_t:"Cycle timeline",tl_s:"",feed_t:"Latest events",feed_s:"",ct_t:"Timing of every cycle",ct_s:"Days after halving and the cycle clock time",
  n_arch:"Archive",ar_h:"Live record – nothing is deleted",ar_lead:"Every block and every price is checked. Each event (halving, top, bottom) marks itself instantly, and the archive robot (GitHub Actions) saves the data every 10 minutes – available years from now.",
  ar_ev:"All events",ar_ev_s:"",ar_day:"Look up a day",ar_day_s:"Pick a date – see that day's data and forecast.",ar_dl:"Download the data",ar_dl_s:"All data is open (CC BY 4.0). Open it in Excel or Python.",
  ar_led:"Daily forecast ledger",ar_led_s:"How the forecast changed each day – a record that cannot be altered.",
@@ -129,6 +129,7 @@ function ols(from){const xs=[],ys=[];for(const r of S.weekly){if(r.t<from||r.t>n
   const b=sxy/sxx,a=my-b*mx;let ss=0,st=0;for(let i=0;i<n;i++){ss+=(ys[i]-a-b*xs[i])**2;st+=(ys[i]-my)**2;}
   return{a,b,r2:1-ss/st,n,sd:Math.sqrt(ss/(n-2)),from,to:S.weekly[S.weekly.length-1].t};}
 function confirmedRaw(){const bots=evList("bottom"),bot=bots[bots.length-1];if(bot&&bot.status==="confirmed")return true;
+  const tops=evList("top"),top=tops[tops.length-1];if(top&&(S.lowT-evT(top))/DAY<MIN_BOT_D)return false;
   const w=lastClosedWeek();return w.c>S.low*CONF&&w.t>monday(S.lowT);}
 // cycles (top + lowest bottom after it) derived from the event log – new cycles appear automatically
 function cyclesFromEvents(){const by={};
@@ -221,7 +222,7 @@ async function fetchWeeks(){ // weekly closes (daily-close based, same basis as 
 /* ---------------- EVENT ENGINE · the same code runs in the browser (live) and in the GitHub Action (archive) ----------------
    Rules: halving = block n×210,000 (exact block time) · top/bottom = new intraday extreme → "suspected", revised in place
    (old value kept in revisions[]) · top confirmed: weekly close < top × 0.80 · bottom confirmed: weekly close > low × 1.20 */
-const TOP_CONF=0.80, NEW_EXT=0.002;
+const TOP_CONF=0.80, NEW_EXT=0.002, CONF2=1.50, MIN_BOT_D=350; // bottom must come ≥ ~11.5 months after the top (history: 12.0–13.4)
 const evT=e=>typeof e.t==="number"?e.t:Date.parse(String(e.t).length<=10?e.t+"T00:00:00Z":e.t);
 const isoT=ms=>new Date(ms).toISOString().replace(".000Z","Z");
 function evList(type){return S.events.filter(e=>e.type===type&&e.status!=="broken").sort((a,b)=>evT(a)-evT(b));}
@@ -250,6 +251,9 @@ function detectEvents(cands,o){o=o||{};const N=o.now||nowMs(),E=S.events,ch=[],l
     const tT=top?evT(top):0,bT=bot?evT(bot):0,ath=tops.length?Math.max(...tops.map(e=>e.p)):Infinity;
     if(bT>tT){ // after a bottom
       if(bot.status==="suspected"&&x.t>=dayOf(bT)&&x.l<bot.p*(1-NEW_EXT))revise(bot,x.live?x.t:x.t,x.l,x.live);
+      else if(bot.status==="confirmed"&&x.t>=dayOf(bT)&&x.l<bot.p*(1-NEW_EXT)){ // a confirmed low was broken: keep it, mark it, open a new suspected low
+        bot.status="broken";bot.brokenAt=x.live?isoT(x.t):iso(x.t);mark(bot,"bottom broken "+bot.p);
+        const e={id:nid("bottom",x.t),type:"bottom",cycle:cycleOf(x.t),t:x.live?isoT(x.t):iso(x.t),p:Math.round(x.l),status:"suspected",precision:x.live?"live":"day",detectedAt:isoT(N),revisions:[],replaces:bot.id};E.push(e);mark(e,"new low "+e.p);}
       else if(bot.status==="confirmed"&&x.h>ath*(1+NEW_EXT)){const e={id:nid("top",x.t),type:"top",cycle:cycleOf(x.t),t:x.live?isoT(x.t):iso(x.t),p:Math.round(x.h),status:"suspected",precision:x.live?"live":"day",detectedAt:isoT(N),revisions:[]};E.push(e);mark(e,"new top "+e.p);}
     }else if(top){ // after a top
       if(top.status==="suspected"&&x.t>=dayOf(tT)&&x.h>top.p*(1+NEW_EXT))revise(top,x.t,x.h,x.live);}}
@@ -260,8 +264,11 @@ function detectEvents(cands,o){o=o||{};const N=o.now||nowMs(),E=S.events,ch=[],l
      if(w){top.status="confirmed";top.confirmedAt=iso(w.t+7*DAY);mark(top,"top confirmed");
        let m=null;for(const r of pts)if(r.t>evT(top)&&(!m||r.l<m.l))m=r;for(const r of S.weekly)if(r.t>monday(evT(top))&&(!m||r.l<m.l))m={t:r.t,l:r.l};
        if(m){const e={id:nid("bottom",m.t),type:"bottom",cycle:cycleOf(m.t),t:iso(m.t),p:Math.round(m.l),status:"suspected",precision:"day",detectedAt:isoT(N),revisions:[]};E.push(e);mark(e,"bottom suspected "+e.p);}}}
-   if(bot&&bot.status==="suspected"&&(!top||evT(bot)>evT(top))){const w=wk.find(w=>w.t>monday(evT(bot))&&w.c>bot.p*CONF);
-     if(w){bot.status="confirmed";bot.confirmedAt=iso(w.t+7*DAY);mark(bot,"bottom confirmed");}}}
+   const late=bot&&(!top||(evT(bot)-evT(top))/DAY>=MIN_BOT_D);
+   if(bot&&late&&bot.status==="suspected"&&(!top||evT(bot)>evT(top))){const w=wk.find(w=>w.t>monday(evT(bot))&&w.c>bot.p*CONF);
+     if(w){bot.status="confirmed";bot.stage=1;bot.confirmedAt=iso(w.t+7*DAY);mark(bot,"bottom confirmed (early, ×1.20)");}}
+   if(bot&&bot.status==="confirmed"&&bot.stage===1){const w=wk.find(w=>w.t>monday(evT(bot))&&w.c>bot.p*CONF2);
+     if(w){bot.stage=2;bot.fullAt=iso(w.t+7*DAY);mark(bot,"bottom confirmed (full, ×1.50)");}}}
   if(ch.length)syncFromEvents();return ch;}
 
 const leftTxt=ms=>{const d=ms/DAY;return d<60?L(`${Math.max(0,Math.round(d))} maalmood`,`${Math.max(0,Math.round(d))} days`):L(`~${Math.round(d/30.44)} bil`,`~${Math.round(d/30.44)} mo`);};
