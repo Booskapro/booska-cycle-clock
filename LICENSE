@@ -1,0 +1,9 @@
+Booska Cycle Clock – © 2026 @Booskapro
+
+Text, formulas, models and the archive data written by this project (data/events.json, data/history.csv)
+are licensed under Creative Commons Attribution 4.0 International (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/  –  you may share and adapt, with credit to @Booskapro.
+
+Third-party parts keep their own licenses:
+- Historical prices 2010–2026 in data/weekly.json: Coin Metrics Community Data (CC BY-NC 4.0, non-commercial) and CoinGecko.
+- TradingView Lightweight Charts (embedded in index.html): Apache License 2.0.

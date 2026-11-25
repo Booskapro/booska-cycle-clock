@@ -1,0 +1,303 @@
+{
+ "version": 1,
+ "updated": "2026-11-24T17:00:00Z",
+ "note": "Booska Cycle Clock event log. Never delete entries; superseded ones get status 'broken'.",
+ "events": [
+  {
+   "id": "halving-1",
+   "type": "halving",
+   "n": 1,
+   "block": 210000,
+   "t": "2012-11-28T15:24:38Z",
+   "status": "confirmed",
+   "src": "seed"
+  },
+  {
+   "id": "halving-2",
+   "type": "halving",
+   "n": 2,
+   "block": 420000,
+   "t": "2016-07-09T16:46:13Z",
+   "status": "confirmed",
+   "src": "seed"
+  },
+  {
+   "id": "halving-3",
+   "type": "halving",
+   "n": 3,
+   "block": 630000,
+   "t": "2020-05-11T19:23:43Z",
+   "status": "confirmed",
+   "src": "seed"
+  },
+  {
+   "id": "halving-4",
+   "type": "halving",
+   "n": 4,
+   "block": 840000,
+   "t": "2024-04-20T00:09:27Z",
+   "status": "confirmed",
+   "src": "seed"
+  },
+  {
+   "id": "top-2013",
+   "type": "top",
+   "cycle": 1,
+   "t": "2013-11-30",
+   "p": 1163,
+   "status": "confirmed",
+   "confirmedAt": "2013-12-09",
+   "precision": "day",
+   "src": "seed"
+  },
+  {
+   "id": "bottom-2015",
+   "type": "bottom",
+   "cycle": 1,
+   "t": "2015-01-14",
+   "p": 152,
+   "precision": "day",
+   "src": "seed",
+   "revisions": [
+    {
+     "t": "2013-12-02",
+     "p": 704,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2013-12-16",
+     "p": 526,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2014-03-24",
+     "p": 459,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2014-03-31",
+     "p": 439,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2014-04-07",
+     "p": 367,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2014-09-29",
+     "p": 323,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2014-12-29",
+     "p": 263,
+     "src": "weekly-close"
+    }
+   ],
+   "status": "confirmed",
+   "confirmedAt": "2015-01-26"
+  },
+  {
+   "id": "top-2017",
+   "type": "top",
+   "cycle": 2,
+   "t": "2017-12-17",
+   "p": 19783,
+   "status": "confirmed",
+   "confirmedAt": "2017-12-25",
+   "precision": "day",
+   "src": "seed"
+  },
+  {
+   "id": "bottom-2018",
+   "type": "bottom",
+   "cycle": 2,
+   "t": "2018-12-15",
+   "p": 3122,
+   "precision": "day",
+   "src": "seed",
+   "revisions": [
+    {
+     "t": "2017-12-18",
+     "p": 14026,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2017-12-25",
+     "p": 12949,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2018-01-15",
+     "p": 11160,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2018-01-22",
+     "p": 10737,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2018-01-29",
+     "p": 8251,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2018-02-05",
+     "p": 6850,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2018-04-02",
+     "p": 6610,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2018-06-11",
+     "p": 6307,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2018-06-18",
+     "p": 6060,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2018-06-25",
+     "p": 5859,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2018-11-12",
+     "p": 5496,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2018-11-19",
+     "p": 3806,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2018-12-03",
+     "p": 3373,
+     "src": "weekly-close"
+    }
+   ],
+   "status": "confirmed",
+   "confirmedAt": "2018-12-24"
+  },
+  {
+   "id": "top-2021",
+   "type": "top",
+   "cycle": 3,
+   "t": "2021-11-10",
+   "p": 69000,
+   "status": "confirmed",
+   "confirmedAt": "2021-12-06",
+   "precision": "day",
+   "src": "seed"
+  },
+  {
+   "id": "bottom-2022",
+   "type": "bottom",
+   "cycle": 3,
+   "t": "2022-11-21",
+   "p": 15476,
+   "precision": "day",
+   "src": "seed",
+   "revisions": [
+    {
+     "t": "2021-11-29",
+     "p": 49160,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2021-12-06",
+     "p": 47437,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2022-01-03",
+     "p": 41513,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2022-01-17",
+     "p": 34996,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2022-05-09",
+     "p": 28797,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2022-06-06",
+     "p": 26830,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2022-06-13",
+     "p": 19014,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2022-11-07",
+     "p": 15758,
+     "src": "weekly-close"
+    }
+   ],
+   "status": "confirmed",
+   "confirmedAt": "2023-01-16"
+  },
+  {
+   "id": "top-2025",
+   "type": "top",
+   "cycle": 4,
+   "t": "2025-10-06",
+   "p": 126210,
+   "status": "confirmed",
+   "confirmedAt": "2025-11-17",
+   "precision": "day",
+   "src": "seed"
+  },
+  {
+   "id": "bottom-2026",
+   "type": "bottom",
+   "cycle": 4,
+   "t": "2026-11-21",
+   "p": 55081,
+   "precision": "day",
+   "src": "seed",
+   "revisions": [
+    {
+     "t": "2025-11-10",
+     "p": 94182,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2025-11-17",
+     "p": 84775,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2026-01-26",
+     "p": 76911,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2026-02-02",
+     "p": 63495,
+     "src": "weekly-close"
+    },
+    {
+     "t": "2026-06-08",
+     "p": 61480,
+     "src": "weekly-close"
+    }
+   ],
+   "status": "suspected"
+  }
+ ]
+}
