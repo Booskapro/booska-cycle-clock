@@ -1,15 +1,15 @@
 // Booska Cycle Clock · archive robot · @Booskapro · CC BY 4.0
 // Runs every 10 minutes in GitHub Actions. It never deletes data:
-//  - data/weekly.json   : weekly candles (closes) – new weeks are appended, old weeks are never removed
-//  - data/events.json   : halvings, tops, bottoms (suspected → confirmed; revisions kept)
-//  - data/history.csv   : one row per UTC day (today's row is updated until the day ends)
-//  - data/status.json   : last run
+//  - weekly.json   : weekly candles (closes) – new weeks are appended, old weeks are never removed
+//  - events.json   : halvings, tops, bottoms (suspected → confirmed; revisions kept)
+//  - history.csv   : one row per UTC day (today's row is updated until the day ends)
+//  - status.json   : last run
 import fs from "node:fs";
 import vm from "node:vm";
 import path from "node:path";
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
-const D = (f) => path.join(ROOT, "data", f);
+const ROOT = path.dirname(new URL(import.meta.url).pathname);
+const D = (f) => path.join(ROOT, f);
 const readJSON = (f, d) => { try { return JSON.parse(fs.readFileSync(D(f), "utf8")); } catch { return d; } };
 const now = Date.now();
 
