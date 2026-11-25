@@ -313,6 +313,17 @@ body{overflow-x:clip}
 }
 .hideL{display:none}@media (max-width:700px){.hideL{display:inline}}
 @media (max-width:700px){#priceCard .abs{display:none}#priceCard .pw-c{white-space:nowrap}}
+
+/* clock zoom modal */
+#clock{cursor:zoom-in}#clockCard{position:relative}
+.clk-exp{display:grid!important;top:12px;right:12px;bottom:auto}
+#clkModal{position:fixed;inset:0;z-index:91;background:rgba(0,0,0,.78);display:none;padding:12px;overflow-y:auto}
+#clkModal.on{display:block}
+#clkModal .cm{max-width:820px;margin:0 auto;padding:16px}
+.cm-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+#clockBig{touch-action:pinch-zoom;overflow:auto}#clockBig svg{width:100%;height:auto;display:block}
+@media (max-width:700px){#clkModal{padding:6px}#clkModal .cm{padding:10px}.clk-exp{top:8px;right:8px;width:28px;height:28px;font-size:13px}}
+#clkList td{white-space:normal;vertical-align:top}#clkList .tm{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}#clkList tr.fut .tm{color:var(--ye)}
 </style>
 </head>
 <body>
@@ -327,7 +338,8 @@ body{overflow-x:clip}
     <button id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </div></header>
-<div id="scrim"></div><div id="toast"></div><div id="pcModal"><div class="card frame pw"></div></div>
+<div id="scrim"></div><div id="toast"></div><div id="clkModal"><div class="card frame cm"><div class="cm-h"><div><p class="ct" data-t="k_clock">Saacadda wareegga</p><p class="cs" data-t="cm_s">Labo far ku weynee · taabo dhibic</p></div><button class="pw-x" id="clkX" aria-label="close">✕</button></div>
+  <div id="clockBig"></div><div style="text-align:center;margin:8px 0"><div class="seg" id="clkSeg2"></div></div><div class="tscroll"><table class="tbl" id="clkList"></table></div></div></div><div id="pcModal"><div class="card frame pw"></div></div>
 <aside id="drawer">
   <button class="x" id="menuX" aria-label="Close">✕</button>
   <a href="#saacadda" data-t="n_clock">Saacadda</a><a href="#wareegyada" data-t="n_cycles">Wareegyada</a><a href="#qiimaha" data-t="n_price">Qiimaha</a><a href="#signal" data-t="n_sig">Signal</a><a href="#xisaabiye" data-t="n_calc">Xisaabiye</a><a href="#qaacidada" data-t="n_form">Moodeelada</a><a href="#kaydka" data-t="n_arch">Kaydka</a>
@@ -339,7 +351,7 @@ body{overflow-x:clip}
 <section class="page" id="p-saacadda">
   <h1 class="strip" id="strip">…</h1>
   <div class="hero3">
-    <div class="card frame" id="clockCard"><div class="ch hideS"><div><p class="ct" data-t="k_clock">Saacadda wareegga</p><p class="cs" data-t="clk_s"></p></div></div>
+    <div class="card frame" id="clockCard"><button class="pw-exp clk-exp" id="clkOpen" aria-label="open">⤢</button><div class="ch hideS"><div><p class="ct" data-t="k_clock">Saacadda wareegga</p><p class="cs" data-t="clk_s"></p></div></div>
       <div id="clock"></div><div class="fline hideS" id="fClock">–</div><div id="clkLeg" class="hideS" style="text-align:center;margin-top:10px"></div></div>
     <div class="card frame pw" id="priceCard"></div>
   </div>
@@ -821,7 +833,7 @@ const T={so:{
  ab_src:"Halka xogtu ka timaado",ab_open:"Fur saacadda →",
  priv_t:"<h3>Privacy</h3><p>Cusboonaysiintii u dambeysay: 23 Nov 2026.</p><p>Booska Cycle Clock <b>akoon ma laha</b>, email ma ururiyo, mana isticmaalo cookies raad-raac ah ama xayeysiis.</p><p>Doorashada luqadda (SO/EN) waxaa lagu kaydiyaa browser-kaaga oo keliya (localStorage).</p><p>Si xogta live ah loo helo, browser-kaagu wuxuu si toos ah ula xiriiraa mempool.space, blockstream.info, CoinGecko, Binance iyo Coinbase. Adeegyadaas waxay arki karaan IP-gaaga sida bog kasta oo internet ah; siyaasadahooda ayaa khuseeya.</p><p>Bogga waxaa martigeliya GitHub Pages, kaas oo kaydin kara log caadi ah (sida IP) sababo amni awgood.</p>",
  terms_t:"<h3>Terms</h3><p><b>Waxbarasho keliya.</b> Wax kasta oo halkan ku jira waa macluumaad iyo waxbarasho – ma aha talo maaliyadeed, maalgashi ama canshuur.</p><p><b>Saxnaanta.</b> Xogta waxaa laga keenaa ilo dadweyne; way daahi kartaa, dhiman kartaa ama qaldami kartaa. Saadaasha waa qaab taariikheed, ma aha ballan.</p><p><b>Damaanad ma jirto.</b> Adeegga waxaa la bixiyaa sida uu yahay. Khasaare kasta oo ka yimaada isticmaalka xogtan mas'uul kama nihin.</p><p>Su'aalo: <a href='https://x.com/Booskapro' target='_blank' rel='noopener'>@Booskapro</a></p>",
- live:"Live",offline:"Xog kaydsan",go_now:"Hadda",k_time:"Waqtiga wareegga Bitcoin",clk_s:"Gacanta = maanta (block-ga live ah) · 24 saac = hal wareeg",tl_t:"Jadwalka wareegyada",tl_s:"",feed_t:"Dhacdooyinka u dambeeyay",feed_s:"",ct_t:"Waqtiga wareeg kasta",ct_s:"Maalmaha halving kaddib iyo saacadda wareegga",
+ live:"Live",offline:"Xog kaydsan",cm_s:"Labo far ku weynee · dhibic kasta waa top ama bottom wareeg hore",go_now:"Hadda",k_time:"Waqtiga wareegga Bitcoin",clk_s:"Gacanta = maanta (block-ga live ah) · 24 saac = hal wareeg",tl_t:"Jadwalka wareegyada",tl_s:"",feed_t:"Dhacdooyinka u dambeeyay",feed_s:"",ct_t:"Waqtiga wareeg kasta",ct_s:"Maalmaha halving kaddib iyo saacadda wareegga",
  n_arch:"Kaydka",ar_h:"Diiwaanka live ah – waxba lama tirtiro",ar_lead:"Block kasta iyo qiime kasta waa la hubiyaa. Dhacdo kasta (halving, top, bottom) isla markiiba way is calaamadaysaa, robot-ka kaydkuna (GitHub Actions) 10 daqiiqo kasta ayuu xogta ku kaydiyaa – sannado kaddib waa la heli karaa.",
  ar_ev:"Dhammaan dhacdooyinka",ar_ev_s:"",ar_day:"Raadi maalin",ar_day_s:"Dooro taariikh – arag xogtii iyo saadaashii maalintaas.",ar_dl:"Soo deji xogta",ar_dl_s:"Xogta oo dhan waa furan (CC BY 4.0). Excel ama Python ku fur.",
  ar_led:"Saadaasha maalin kasta (forecast ledger)",ar_led_s:"Sida saadaashu isu beddeshay maalin kasta – caddayn aan la beddeli karin.",
@@ -857,7 +869,7 @@ const T={so:{
  ab_src:"Where the numbers come from",ab_open:"Open the clock →",
  priv_t:"<h3>Privacy</h3><p>Last updated: 23 Nov 2026.</p><p>Booska Cycle Clock has <b>no accounts</b>, collects no email, and uses no tracking cookies or ads.</p><p>Your language choice (SO/EN) is stored only in your browser (localStorage).</p><p>For live data your browser connects directly to mempool.space, blockstream.info, CoinGecko, Binance and Coinbase. Like any website they can see your IP address; their policies apply.</p><p>The site is hosted on GitHub Pages, which may keep standard logs (such as IP) for security.</p>",
  terms_t:"<h3>Terms</h3><p><b>Education only.</b> Everything here is information and education – not financial, investment or tax advice.</p><p><b>Accuracy.</b> Data comes from public sources and may be delayed, missing or wrong. Forecasts are a historical pattern, not a promise.</p><p><b>No warranty.</b> The service is provided as is. We are not liable for losses from using this data.</p><p>Questions: <a href='https://x.com/Booskapro' target='_blank' rel='noopener'>@Booskapro</a></p>",
- live:"Live",offline:"Cached data",go_now:"Now",k_time:"Bitcoin cycle time",clk_s:"Hand = today (live block) · 24 hours = one cycle",tl_t:"Cycle timeline",tl_s:"",feed_t:"Latest events",feed_s:"",ct_t:"Timing of every cycle",ct_s:"Days after halving and the cycle clock time",
+ live:"Live",offline:"Cached data",cm_s:"Pinch to zoom · each dot is a past top or bottom",go_now:"Now",k_time:"Bitcoin cycle time",clk_s:"Hand = today (live block) · 24 hours = one cycle",tl_t:"Cycle timeline",tl_s:"",feed_t:"Latest events",feed_s:"",ct_t:"Timing of every cycle",ct_s:"Days after halving and the cycle clock time",
  n_arch:"Archive",ar_h:"Live record – nothing is deleted",ar_lead:"Every block and every price is checked. Each event (halving, top, bottom) marks itself instantly, and the archive robot (GitHub Actions) saves the data every 10 minutes – available years from now.",
  ar_ev:"All events",ar_ev_s:"",ar_day:"Look up a day",ar_day_s:"Pick a date – see that day's data and forecast.",ar_dl:"Download the data",ar_dl_s:"All data is open (CC BY 4.0). Open it in Excel or Python.",
  ar_led:"Daily forecast ledger",ar_led_s:"How the forecast changed each day – a record that cannot be altered.",
@@ -1095,7 +1107,7 @@ function applyI18n(){
 function renderLive(){
   const on=S.liveB||S.liveP;$("liveDot").className="dot"+(on?" on":"");
   const d=new Date();$("liveTxt").textContent=(on?t("live"):t("offline"))+" · "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");}
-function clockSVG(){
+function clockSVG(mode,big){mode=mode||CLK_MODE;
   const b=curBlock(),n=Math.floor(b/HALVING_BLOCKS),base=n*HALVING_BLOCKS,h=(b-base)/HALVING_BLOCKS*24;
   const C=400,R=330,P=(hh,r)=>[C+r*Math.sin(hh/24*2*Math.PI),C-r*Math.cos(hh/24*2*Math.PI)],f=v=>v.toFixed(1);
   const hrsOf=(ms,cn)=>(blockAt(ms)-cn*HALVING_BLOCKS)/HALVING_BLOCKS*24;
@@ -1116,24 +1128,41 @@ function clockSVG(){
   const lc=M.ev.find(c=>c.n===n);
   {const[x,y]=P(0,R);s+=`<circle cx="${f(x)}" cy="${f(y)}" r="9" fill="var(--or)" stroke="var(--clock-bg)" stroke-width="3"><title>Halving ${n}</title></circle>`;}
   if(lc){const tr_=lc.top,bt=lc.bot,ht=(blockAt(tr_.t)-n*HALVING_BLOCKS)/HALVING_BLOCKS*24,hb=(blockAt(bt.t)-n*HALVING_BLOCKS)/HALVING_BLOCKS*24;
-    {const[x,y]=P(ht,R);s+=`<circle cx="${f(x)}" cy="${f(y)}" r="11" fill="var(--rd)" stroke="#fff" stroke-width="2.5"><title>Top · ${dstr(tr_.t)} · ${usd(tr_.p)}</title></circle>`+lbl(ht,R-90,`Top ${hm(ht)}`,`${dstr(tr_.t)} · ${usdK(tr_.p)}`,"var(--rd)");}
-    {const[x,y]=P(hb,R);s+=`<circle cx="${f(x)}" cy="${f(y)}" r="11" fill="${bt.prov?"var(--clock-bg)":"var(--gr)"}" stroke="${bt.prov?"var(--gr)":"#fff"}" stroke-width="${bt.prov?4:2.5}"><title>Low · ${dstr(bt.t)} · ${usd(bt.p)}</title></circle>`+lbl(hb,R-90,`Low ${hm(hb)}${bt.prov?" ◐":""}`,`${dstr(bt.t)} · ${usdK(bt.p)}`,"var(--gr)");}}
-  if(CLK_MODE!=="simple"){const RAD=[115,145,175],cyc=[n-3,n-2,n-1];
+    {const[x,y]=P(ht,R);s+=`<circle cx="${f(x)}" cy="${f(y)}" r="11" fill="var(--rd)" stroke="#fff" stroke-width="2.5"><title>Top · ${dstr(tr_.t)} · ${usd(tr_.p)}</title></circle>`+(big?"":lbl(ht,R-90,`Top ${hm(ht)}`,`${dstr(tr_.t)} · ${usdK(tr_.p)}`,"var(--rd)"));}
+    {const[x,y]=P(hb,R);s+=`<circle cx="${f(x)}" cy="${f(y)}" r="11" fill="${bt.prov?"var(--clock-bg)":"var(--gr)"}" stroke="${bt.prov?"var(--gr)":"#fff"}" stroke-width="${bt.prov?4:2.5}"><title>Low · ${dstr(bt.t)} · ${usd(bt.p)}</title></circle>`+(big?"":lbl(hb,R-90,`Low ${hm(hb)}${bt.prov?" ◐":""}`,`${dstr(bt.t)} · ${usdK(bt.p)}`,"var(--gr)"));}}
+  const LB=[];
+  if(mode!=="simple"){const RAD=[115,145,175],cyc=[n-3,n-2,n-1];
     cyc.forEach((cn,i)=>{if(cn<1)return;const r=RAD[i];
       s+=`<circle cx="${C}" cy="${C}" r="${r}" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="3 5"/>`;
       const[lx,ly]=P(23.3,r);s+=`<text x="${f(lx)}" y="${f(ly+4)}" text-anchor="end" font-size="12" fill="var(--mu)">${2012+4*(cn-1)}</text>`;
       const c=M.ev.find(x=>x.n===cn);if(c)for(const[e,col]of[[c.top,"var(--rd)"],[c.bot,"var(--gr)"]]){const hh=(blockAt(e.t)-cn*HALVING_BLOCKS)/HALVING_BLOCKS*24,[x,y]=P(hh,r);
-        s+=`<circle cx="${f(x)}" cy="${f(y)}" r="6" fill="${col}" stroke="var(--clock-bg)" stroke-width="2"><title>${dstr(e.t)} · ${usd(e.p)} · ${hm(hh)}</title></circle>`;}
-      if(CLK_MODE==="all"){const fl=M.fl.find(x=>x&&x.n===cn);
+        s+=`<circle cx="${f(x)}" cy="${f(y)}" r="${big?9:6}" fill="${col}" stroke="var(--clock-bg)" stroke-width="2"><title>${dstr(e.t)} · ${usd(e.p)} · ${hm(hh)}</title></circle>`;
+        if(big)LB.push({x,y,rt:x>=C,col,txt:`${new Date(e.t).getUTCFullYear()} · ${hm(hh)}`});}
+      if(mode==="all"){const fl=M.fl.find(x=>x&&x.n===cn);
         if(fl){{const hh=(blockAt(fl.lo.t)-cn*HALVING_BLOCKS)/HALVING_BLOCKS*24,[x,y]=P(hh,r);s+=`<circle cx="${f(x)}" cy="${f(y)}" r="4" fill="none" stroke="var(--gr)" stroke-width="2"><title>${t("ev_first")} · ${mstr(fl.lo.t)}</title></circle>`;}
           if(fl.rel){const hh=(blockAt(fl.rel.t)-cn*HALVING_BLOCKS)/HALVING_BLOCKS*24,[x,y]=P(hh,r);s+=`<circle cx="${f(x)}" cy="${f(y)}" r="4" fill="none" stroke="var(--rd)" stroke-width="2"><title>${t("ev_rel")} · ${mstr(fl.rel.t)}</title></circle>`;}}}});}
+  for(const side of[true,false]){const g=LB.filter(l=>l.rt===side).sort((p,q)=>p.y-q.y);let last=-1e9;
+    const colX=g.length?(side?Math.max(...g.map(l=>l.x))+26:Math.min(...g.map(l=>l.x))-26):0;
+    const up=g.length>1&&g.some(l=>l.y>C),y0=g.length?Math.min(...g.map(l=>l.y))-18-(g.length-1)*26:0;
+    g.sort((p,q)=>up?(side?p.y-q.y:p.txt.localeCompare(q.txt)):p.y-q.y);
+    for(const [k,l] of g.entries()){let ly=up?y0+k*26:Math.max(l.y+5,last+26);last=ly;const lx=colX;
+      s+=`<line x1="${f(l.x)}" y1="${f(l.y)}" x2="${f(lx+(side?-4:4))}" y2="${f(ly-5)}" stroke="${l.col}" stroke-width="1.2" opacity=".6"/><text x="${f(lx)}" y="${f(ly)}" text-anchor="${side?"start":"end"}" font-size="17" font-weight="800" fill="${l.col}" stroke="var(--clock-bg)" stroke-width="4" paint-order="stroke">${l.txt}</text>`;}}
   const[hx,hy]=P(h,338);s+=`<line x1="${C}" y1="${C}" x2="${f(hx)}" y2="${f(hy)}" stroke="var(--tx)" stroke-width="6" stroke-linecap="round"/><circle cx="${f(hx)}" cy="${f(hy)}" r="7" fill="var(--or)" class="pulse"/>`;
   s+=`<circle cx="${C}" cy="${C}" r="92" fill="var(--clock-face)" stroke="var(--or)" stroke-width="3"/>`;
   s+=`<text x="${C}" y="378" text-anchor="middle" font-size="15" fill="var(--mu)">${t("k_clock")}</text>`;
   s+=`<text x="${C}" y="420" text-anchor="middle" font-size="44" font-weight="800" fill="var(--or)">${hm(h)}</text>`;
   s+=`<text x="${C}" y="450" text-anchor="middle" font-size="14" fill="var(--tx)">#${nf(b)}</text></svg>`;
   return s;}
-let CLK_MODE="simple";
+let CLK_MODE="simple",CLKM="history";
+function renderClockModal(){const m=$("clkModal");if(!m||!m.classList.contains("on"))return;
+  $("clockBig").innerHTML=clockSVG(CLKM,true);
+  $("clkSeg2").innerHTML=[["simple",L("Wareeggan","This cycle")],["history",L("+ Kuwii hore","+ Past")],["all",L("+ Dhammaan","+ All")]].map(x=>`<button data-m="${x[0]}" class="${CLKM===x[0]?"on":""}">${x[1]}</button>`).join("");
+  const F=forecast(),cell=(h,t,p,cls)=>`<div class="tm ${cls}">${h}</div><div class="cs">${t}${p?" · "+p:""}</div>`;
+  let r=`<tr><th>${L("Wareeg","Cycle")}</th><th>Top</th><th>Bottom</th></tr>`;
+  r+=`<tr class="fut"><td><b>${2012+4*(F.n-1)}?</b></td><td>${cell("~"+hm(mean(M.topWin)),"~"+dstr(F.top),"","")}</td><td>${cell("~"+hm(mean(M.botWin)),"~"+dstr(F.bot),"","")}</td></tr>`;
+  for(const c of M.ev.slice().reverse())r+=`<tr><td><b>${c.y}</b></td><td>${cell(c.n>=2?c.top.hm:"–",dstr(c.top.t),usdK(c.top.p),"rdc")}</td><td>${cell(c.n>=2?c.bot.hm:"–",dstr(c.bot.t),usdK(c.bot.p)+(c.bot.prov?" ◐":""),"grc")}</td></tr>`;
+  $("clkList").innerHTML=r;}
+function clockModal(on){const m=$("clkModal");if(on){m.classList.add("on");document.body.style.overflow="hidden";renderClockModal();}else{m.classList.remove("on");document.body.style.overflow="";}}
 const evName=e=>e.type==="halving"?"Halving "+e.n:(e.type==="top"?"Top ":"Bottom ")+new Date(evT(e)).getUTCFullYear();
 const evWhen=e=>{const ms=evT(e),d=new Date(ms);return dstr(ms)+(e.precision==="hour"||e.precision==="live"||e.type==="halving"?" · "+String(d.getUTCHours()).padStart(2,"0")+":"+String(d.getUTCMinutes()).padStart(2,"0")+" UTC":"");};
 function evClock(e){const cn=e.type==="halving"?e.n:e.cycle;return hm((blockAt(evT(e))-cn*HALVING_BLOCKS)/HALVING_BLOCKS*24);}
@@ -1148,6 +1177,7 @@ function renderDash(){
   $("clkLeg").innerHTML=`<div class="seg" id="clkSeg">${[["simple",L("Wareeggan","This cycle")],["history",L("+ Kuwii hore","+ Past")],["all",L("+ Dhammaan","+ All")]].map(m=>`<button data-m="${m[0]}" class="${CLK_MODE===m[0]?"on":""}">${m[1]}</button>`).join("")}</div>`+
     `<div class="legend" style="justify-content:center;margin-top:8px"><span><b style="color:var(--or)">●</b> Halving</span><span><b style="color:var(--rd)">●</b> Top</span><span><b style="color:var(--gr)">●</b> Low</span><span><b style="color:var(--gr)">◐</b> ${t("es_suspected")}</span><span><b style="color:var(--rd);opacity:.5">▮</b> ${L("Daaqadda top","Top window")}</span><span><b style="color:var(--gr);opacity:.5">▮</b> ${L("Daaqadda bottom","Bottom window")}</span></div>`;
   $("clkSeg").onclick=e=>{const m=e.target.dataset.m;if(!m)return;CLK_MODE=m;renderDash();};
+  $("clock").onclick=()=>clockModal(true);renderClockModal();
   const dl=Math.floor((F.h5-nowMs())/DAY);
   $("strip").innerHTML=`<span class="orc">${hm(h)}</span><span class="sd">·</span><span style="color:${col}">${t("ph_"+ph)}</span><span class="sd">·</span>Halving ${n+1}: <b>${nf(dl)}</b> <span class="long">${L("maalmood","days")}</span><span class="hideL">${L("m","d")}</span><span class="sd hideS">·</span><span class="hideS">${L("Maalin","Day")} ${nf(Math.floor(days))} · ${((b-base)/HALVING_BLOCKS*100).toFixed(1)}% · Block ${nf(b)}</span>`;
   // countdowns
@@ -1553,6 +1583,8 @@ async function boot(){
   $("menuBtn").onclick=()=>document.body.classList.add("menu");$("menuX").onclick=$("scrim").onclick=()=>document.body.classList.remove("menu");
   $("langBtn").onclick=()=>{LANG=LANG==="so"?"en":"so";try{localStorage.setItem("booska_lang",LANG);}catch(e){}applyI18n();renderAll();rebuildCharts();};
   $("arDate").addEventListener("input",showDay);
+  $("clkOpen").onclick=()=>clockModal(true);$("clkX").onclick=()=>clockModal(false);$("clkModal").onclick=e=>{if(e.target.id==="clkModal")clockModal(false);};
+  $("clkSeg2").onclick=e=>{const m=e.target.dataset.m;if(!m)return;CLKM=m;renderClockModal();};
   try{matchMedia("(prefers-color-scheme: light)").addEventListener("change",()=>{renderAll();rebuildCharts();});}catch(e){}
   if(await loadArchive()){renderAll();rebuildCharts();}
   connectWS();tick(true);
