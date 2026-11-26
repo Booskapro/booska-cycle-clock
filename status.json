@@ -1,8 +1,8 @@
 {
- "lastWrite": "2026-11-25T17:26:36.693Z",
- "lastRun": "2026-11-25T17:26:36.693Z",
- "block": 977544,
- "price": 59124,
+ "lastWrite": "2026-11-26T00:59:22.455Z",
+ "lastRun": "2026-11-26T00:59:22.455Z",
+ "block": 977602,
+ "price": 60410,
  "sources": {
   "block": "mempool.space",
   "price": "CoinGecko"
