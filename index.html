@@ -22,6 +22,7 @@
 <meta name="twitter:image" content="https://booskaclock.vercel.app/og.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Booska Cycle Clock","url":"https://booskaclock.vercel.app/","applicationCategory":"FinanceApplication","operatingSystem":"Any","inLanguage":["so","en"],"isAccessibleForFree":true,"creator":{"@type":"Person","name":"Booskapro","url":"https://x.com/Booskapro"},"license":"https://creativecommons.org/licenses/by/4.0/","description":"Live Bitcoin cycle clock: halving, top and bottom timing with open formulas."}</script>
 <meta name="theme-color" content="#0B0E14">
+<script>(function(){try{var th=localStorage.getItem("booska_theme");if(th==="light"||th==="dark")document.documentElement.setAttribute("data-theme",th);}catch(e){}})();</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F7931A'/%3E%3Ctext x='32' y='43' font-size='32' font-family='Arial' font-weight='700' text-anchor='middle' fill='%23141414'%3EB%3C/text%3E%3C/svg%3E">
 <style>:root{
   --or-tx:#F7931A;
@@ -30,11 +31,16 @@
   --clock-bg:#0E0E0E;--clock-face:#141414;--shadow:0 1px 0 rgba(255,255,255,.02);
   --r:14px;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
-@media (prefers-color-scheme:light){:root{
+@media (prefers-color-scheme:light){:root:not([data-theme=dark]){
   --or-tx:#B45309;--ye:#A16207;
   --bg:#F5F6F8;--card:#FFFFFF;--card2:#F1F3F6;--line:#E3E6EB;--tx:#121722;--mu:#5B6372;--mu2:#8A93A2;
   --or-soft:rgba(247,147,26,.14);--clock-bg:#FFFFFF;--clock-face:#F8F8F8;--shadow:0 1px 2px rgba(16,24,40,.05);
 }}
+:root[data-theme=light]{
+  --or-tx:#B45309;--ye:#A16207;
+  --bg:#F5F6F8;--card:#FFFFFF;--card2:#F1F3F6;--line:#E3E6EB;--tx:#121722;--mu:#5B6372;--mu2:#8A93A2;
+  --or-soft:rgba(247,147,26,.14);--clock-bg:#FFFFFF;--clock-face:#F8F8F8;--shadow:0 1px 2px rgba(16,24,40,.05);
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--font);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -401,6 +407,14 @@ html.snapping .snapbtn{visibility:hidden}
 .inv-mini{display:flex;align-items:center;gap:12px;margin-top:16px;text-decoration:none;color:var(--tx);border-left:5px solid var(--c)!important}
 .inv-mini .dot{width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c);flex:none;animation:sblink 1.6s infinite}
 .inv-mini div{flex:1}.inv-mini b{display:block}.inv-mini span{font-size:13px;color:var(--mu)}.inv-mini em{font-style:normal;color:var(--or);font-weight:800;white-space:nowrap}
+
+#themeBtn{min-width:44px;font-size:17px;line-height:1;cursor:pointer}
+html.theme-anim *{transition:background-color .35s,color .35s,border-color .35s!important}
+/* roomier header with Maalgashi + theme button */
+.livebar .lt{white-space:nowrap}
+@media (max-width:1500px){.livebar .lt{display:none}nav.tabs a{padding:8px 10px}}
+@media (max-width:1320px){nav.tabs{display:none}#menuBtn{display:grid}.hbtns{margin-left:auto}}
+@media (max-width:520px){.livebar{display:none}.bname{font-size:15px}.bsub{display:none}#themeBtn{min-width:36px;padding:6px 8px}#langBtn{padding:6px 9px}}
 </style>
 </head>
 <body>
@@ -411,7 +425,7 @@ html.snapping .snapbtn{visibility:hidden}
   </nav>
   <div class="hbtns">
     <div class="livebar"><span class="dot" id="liveDot"></span><span class="lt" id="liveTxt">…</span></div>
-    <button class="pill" id="langBtn"><b>SO</b> | EN</button>
+    <button class="pill" id="themeBtn" aria-label="Theme" title="Habeen / Maalin">🌙</button><button class="pill" id="langBtn"><b>SO</b> | EN</button>
     <button id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </div></header>
@@ -1246,6 +1260,11 @@ function clockSVG(mode,big,clean){mode=mode||CLK_MODE;
   s+=`<text x="${C}" y="450" text-anchor="middle" font-size="14" fill="var(--tx)">#${nf(b)}</text></svg>`;
   return s;}
 let CLK_MODE="simple",CLKM="history";
+function isLight(){const a=document.documentElement.getAttribute("data-theme");return a?a==="light":matchMedia("(prefers-color-scheme: light)").matches;}
+function themeIcon(){const b=$("themeBtn");if(b){b.textContent=isLight()?"🌙":"☀️";b.title=isLight()?L("Habeen","Dark mode"):L("Maalin","Light mode");}
+  const m=document.querySelector('meta[name="theme-color"]');m&&m.setAttribute("content",isLight()?"#F5F6F8":"#0B0E14");}
+function setTheme(th){const r=document.documentElement;r.classList.add("theme-anim");r.setAttribute("data-theme",th);try{localStorage.setItem("booska_theme",th);}catch(e){}
+  themeIcon();setTimeout(()=>{r.classList.remove("theme-anim");try{renderAll();rebuildCharts();}catch(e){}},60);}
 /* ---------- SPIRAL CLOCK: one turn = one halving cycle (00:00 = halving) · auto-grows every cycle ---------- */
 function cycleEvents(n){const tops=S.events.filter(e=>e.type==="top"&&e.cycle===n&&e.status!=="broken"),top=tops.length?tops.reduce((a,b)=>b.p>a.p?b:a):null;
   const bots=top?S.events.filter(e=>e.type==="bottom"&&e.cycle>=n&&evT(e)>evT(top)&&(e.cycle===n||(evT(e)<halvingMs(n+1)))):[];
@@ -1419,7 +1438,7 @@ const SNAP_SKIP=["snapbtn","pw-exp","pw-x","seg","ch","fline","cm-h","pw-ty","pw
 const cvar=c=>{if(!c)return c;const m=/^var\((--[\w-]+)\)$/.exec(c.trim());return m?getComputedStyle(document.body).getPropertyValue(m[1]).trim():c;};
 async function snapCard(card,btn){
   if(!window.htmlToImage){toast(L("Sawirka lama heli karo","Snapshot unavailable"));return;}
-  btn&&(btn.disabled=true);document.documentElement.classList.add("snapping");
+  btn&&(btn.disabled=true);document.documentElement.classList.add("snapping");const prevTh=document.documentElement.getAttribute("data-theme");document.documentElement.setAttribute("data-theme","dark");await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
   try{const meta=snapMeta(card),cs=getComputedStyle(document.body);
     const tmp=null,tgt=card;
     const png=meta.clock?await svgCanvas(spiralSVG({clean:true}),1500):await htmlToImage.toCanvas(tgt,{pixelRatio:meta.clock?1.6:3,backgroundColor:meta.clock?null:getComputedStyle(card).backgroundColor,skipFonts:true,
@@ -1455,7 +1474,7 @@ async function snapCard(card,btn){
     if(navigator.canShare&&navigator.canShare({files:[file]})&&matchMedia("(pointer:coarse)").matches){try{await navigator.share({files:[file],title:"Booska Cycle Clock"});}catch(e){}}
     else{const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000);toast(L("Sawirka waa la keydiyay ✓","Image saved ✓"));}
   }catch(e){console.error(e);toast(L("Sawirka lama samayn karin","Could not create image"));}
-  finally{document.documentElement.classList.remove("snapping");btn&&(btn.disabled=false);}}
+  finally{if(prevTh)document.documentElement.setAttribute("data-theme",prevTh);else document.documentElement.removeAttribute("data-theme");document.documentElement.classList.remove("snapping");btn&&(btn.disabled=false);}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".snapbtn");if(!b)return;e.preventDefault();e.stopPropagation();snapCard(b.parentElement,b);},true);
 const WD_SO=["Axad","Isniin","Talaado","Arbaco","Khamiis","Jimce","Sabti"],WD_EN=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 function tickSec(){const now=Date.now(),deg=Math.floor(now/1000)*6;document.querySelectorAll(".sech").forEach(g=>g.style.transform=`rotate(${deg}deg)`);
@@ -1846,7 +1865,7 @@ function pcMount(el,full){el.innerHTML=pcMarkup(full);const ch=el.querySelector(
   new ResizeObserver(()=>requestAnimationFrame(()=>pcLabels(w))).observe(ch);
   PC.W.push(w);return w;}
 function pcHeader(){const b=PC.bars;if(!b.length)return;const first=b[0].o||b[0].c,last=S.price||b[b.length-1].c,d=last-first,p=d/first*100,col=d>=0?"var(--gr)":"var(--rd)";
-  for(const w of PC.W){w.el.querySelector(".pw-p").textContent=nf(last);const c=w.el.querySelector(".pw-c");c.innerHTML=`${p>=0?"+":"−"}${Math.abs(p).toFixed(2)}%<span class="abs"> (${d>=0?"+":"−"}${nf(Math.abs(d))})</span><span class="rng">· ${L(rangeOf(PC.range).so,rangeOf(PC.range).en)}</span>`;c.style.color=col;
+  for(const w of PC.W){w.el.querySelector(".pw-p").textContent=nf(last);const c=w.el.querySelector(".pw-c");c.innerHTML=`${Math.abs(p)>=10000?"×"+nf(Math.round(last/first)):(p>=0?"+":"−")+Math.abs(p).toFixed(2)+"%"}<span class="abs"> (${d>=0?"+":"−"}${nf(Math.abs(d))})</span><span class="rng">· ${L(rangeOf(PC.range).so,rangeOf(PC.range).en)}</span>`;c.style.color=col;
     const dot=w.el.querySelector(".pw-t .dot");dot&&(dot.className="dot"+(S.liveP?" on":""));w.el.querySelector(".pw-n").textContent=PC.note;
     w.el.querySelectorAll(".pw-r button").forEach(x=>x.classList.toggle("on",x.dataset.r===PC.range));w.el.querySelectorAll(".pw-ty button").forEach(x=>x.classList.toggle("on",x.dataset.ty===PC.type));}}
 function pcLabels(w){const b=PC.bars;if(!b.length)return;const s=PC.type==="line"?w.area:w.cand;
@@ -1897,7 +1916,8 @@ async function boot(){
   $("arDate").addEventListener("input",showDay);
   $("clkOpen").onclick=()=>clockModal(true);$("clkX").onclick=()=>clockModal(false);$("clkModal").onclick=e=>{if(e.target.id==="clkModal")clockModal(false);};
   
-  try{matchMedia("(prefers-color-scheme: light)").addEventListener("change",()=>{renderAll();rebuildCharts();});}catch(e){}
+  try{matchMedia("(prefers-color-scheme: light)").addEventListener("change",()=>{if(document.documentElement.getAttribute("data-theme"))return;themeIcon();renderAll();rebuildCharts();});}catch(e){}
+  themeIcon();$("themeBtn").onclick=()=>setTheme(isLight()?"dark":"light");
   if(await loadArchive()){renderAll();rebuildCharts();}
   connectWS();tick(true);
   setInterval(()=>tick(false),60000);setInterval(()=>loadArchive().then(c=>{if(c)renderAll();}),5*60000);
