@@ -417,6 +417,22 @@ html.theme-anim *{transition:background-color .35s,color .35s,border-color .35s!
 .brand{flex:none}.hbtns{flex:none}nav.tabs{min-width:0;overflow:hidden;flex-wrap:nowrap}nav.tabs a{white-space:nowrap}
 html.nav-c1 .livebar .lt{display:none}html.nav-c1 nav.tabs a{padding:8px 9px}
 html.nav-c2 nav.tabs{display:none}html.nav-c2 #menuBtn{display:grid}html.nav-c2 .hbtns{margin-left:auto}
+
+/* wide screens: home sidebar */
+.home-side{display:none}
+@media (min-width:1560px){
+  .top .wrap,main.wrap{max-width:1580px}
+  .home-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;align-items:start}
+  .home-side{display:flex;flex-direction:column;gap:16px;position:sticky;top:86px;margin-top:62px}
+}
+.home-side .card{margin:0}
+.sd-zone{display:block;text-decoration:none;color:var(--tx);border-left:5px solid var(--c)!important;background:color-mix(in srgb,var(--c) 8%,var(--card))}
+.sd-zone b{display:block;font-size:24px;color:var(--c);margin:4px 0}.sd-zone span{font-size:12.5px;color:var(--mu)}
+.sd-k{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}.sd-k:last-child{border:none}.sd-k span:first-child{color:var(--mu)}
+.sd-ev{display:flex;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}.sd-ev:last-child{border:none}
+.sd-ev i{width:10px;height:10px;border-radius:50%;flex:none}.sd-ev b{display:block;font-size:14px}.sd-ev span{font-size:12px;color:var(--mu)}
+.sd-x{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--tx)}.sd-x img{width:46px;height:46px;border-radius:50%;border:3px solid #F7931A;box-shadow:0 0 14px rgba(247,147,26,.5);object-fit:cover;background:#fff}
+.sd-x b{display:flex;gap:6px;align-items:center;color:var(--or);font-size:16px}.sd-x span{font-size:12.5px;color:var(--mu)}
 </style>
 </head>
 <body>
@@ -442,6 +458,7 @@ html.nav-c2 nav.tabs{display:none}html.nav-c2 #menuBtn{display:grid}html.nav-c2 
 <main class="wrap">
 <!-- ============ WAQTIGA (home) ============ -->
 <section class="page" id="p-saacadda">
+<div class="home-grid"><div class="home-main">
   <h1 class="strip" id="strip">…</h1>
   <div class="hero3">
     <div class="card frame" id="clockCard"><button class="pw-exp clk-exp" id="clkOpen" aria-label="open">⤢</button><div class="ch hideS"><div><p class="ct" data-t="k_clock">Saacadda wareegga</p><p class="cs" data-t="clk_s"></p></div></div>
@@ -456,6 +473,7 @@ html.nav-c2 nav.tabs{display:none}html.nav-c2 #menuBtn{display:grid}html.nav-c2 
     <div class="card"><div class="ch"><div><p class="ct" data-t="feed_t">Dhacdooyinka u dambeeyay</p><p class="cs" data-t="feed_s">–</p></div><a class="more" href="#kaydka" data-t="more">Fiiri →</a></div><div id="feed"></div></div>
     <div class="card"><div class="ch"><div><p class="ct" data-t="ct_t">Waqtiga wareeg kasta</p><p class="cs" data-t="ct_s">–</p></div></div><div class="tscroll"><table class="tbl" id="cycTbl"></table></div><p class="cs" id="cycNote" style="margin-top:8px"></p></div>
   </div>
+</div><aside class="home-side" id="homeSide"></aside></div>
 </section>
 
 <!-- ============ WAREEGYADA ============ -->
@@ -1397,6 +1415,23 @@ function invCalcUpd(){const a=document.activeElement&&document.activeElement.id;
 function renderInvMini(cur,mLeft){const el=$("invMini");if(!el)return;if(!cur){el.style.display="none";return;}el.style.display="";
   el.style.setProperty("--c",cur.z.col);
   el.innerHTML=`<span class="dot"></span><div><b>${L("Hadda","Now")}: ${zName(cur.z)}</b><span>${zDesc(cur.z)} · ${L(`${mLeft.toFixed(0)} bilood ayaa ka dhiman`,`${mLeft.toFixed(0)} months left`)}</span></div><em>${L("Maalgashi","Invest")} →</em>`;}
+
+function renderSide(){const el=$("homeSide");if(!el||!M||!M.ev)return;
+  const b=curBlock(),n=Math.floor(b/HALVING_BLOCKS),E=cycleEvents(n),segs=zoneSegs(),cur=zoneAt(nowMs(),segs);
+  const mLeft=cur?Math.max(0,(cur.b-nowMs())/(30.44*DAY)):0,hh=ms=>hm((blockAt(ms)-n*HALVING_BLOCKS)/HALVING_BLOCKS*24);
+  const mk=e=>e.status==="suspected"?"◐":e.status==="broken"?"✕":(e.stage===1?"◑":"✔");
+  const rows=[[L(`Halving ${n}`,`Halving ${n}`),dstr(hStart(n))]];
+  if(E.top)rows.push(["Top",`<b style="color:var(--rd)">${usd(E.top.p)} · ${hh(evT(E.top))}</b>`]);
+  if(E.bot)rows.push(["Low",`<b style="color:var(--gr)">${usd(E.bot.p)} · ${hh(evT(E.bot))} ${mk(E.bot)}</b>`]);
+  if(E.top&&E.bot)rows.push([L("Hoos u dhac","Drawdown"),pct((E.bot.p/E.top.p-1)*100)]);
+  rows.push([`Halving ${n+1}`,"~"+dstr(hStart(n+1))]);
+  const nm={halving:"Halving",top:"Top",bottom:"Bottom"},cl={halving:"var(--or)",top:"var(--rd)",bottom:"var(--gr)"};
+  const ev=S.events.slice().sort((a,c)=>evT(c)-evT(a)).slice(0,5);
+  const img=document.querySelector(".fcred img");
+  el.innerHTML=`${cur?`<a class="card sd-zone" href="#maalgashi" style="--c:${cur.z.col}"><p class="ct">${L("Aagga maalgashiga","Investment zone")}</p><b>● ${zName(cur.z)}</b><span>${ym(cur.a)} → ${ym(cur.b)} · ${L(`${mLeft.toFixed(0)} bilood ayaa ka dhiman`,`${mLeft.toFixed(0)} months left`)}</span></a>`:""}
+  <div class="card"><p class="ct">${L("Wareeggan hal jaleecada","This cycle at a glance")}</p>${rows.map(r=>`<div class="sd-k"><span>${r[0]}</span><span>${r[1]}</span></div>`).join("")}</div>
+  <div class="card"><p class="ct">${L("Dhacdooyinka u dambeeyay","Latest events")}</p>${ev.map(e=>`<div class="sd-ev"><i style="background:${cl[e.type]}"></i><div><b>${nm[e.type]} ${new Date(evT(e)).getUTCFullYear()}${e.type==="halving"?" · block "+nf(e.block||e.b||HALVING_BLOCKS*e.cycle):" · "+usd(e.p)}</b><span>${dstr(evT(e))}${e.type!=="halving"?" · "+mk(e)+" "+t("es_"+(e.status||"confirmed")):""}</span></div></div>`).join("")}</div>
+  <a class="card sd-x" href="https://x.com/Booskapro" target="_blank" rel="noopener">${img?`<img src="${img.src}" alt="">`:""}<div><b><svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> @Booskapro</b><span>${L("Raac si aad u hesho cusbooneysiinta","Follow for updates")}</span></div></a>`;}
 /* ---------- bottom confirmation meter (2 stages + 12-month rule) ---------- */
 function renderBotMeter(){const el=$("botMeter");if(!el)return;
   const b=curBlock(),n=Math.floor(b/HALVING_BLOCKS),E=cycleEvents(n),bot=E.bot;
@@ -1427,7 +1462,7 @@ function renderHowClock(){const el=$("abClock");if(!el)return;
   <p>${L("<b style='color:var(--or)'>Oranji</b> = kor-u-kac · <b style='color:var(--rd)'>Gaduud</b> = suuqa dhiig baxay (top → bottom) · <b style='color:var(--gr)'>Cagaar</b> = soo kabasho.","<b style='color:var(--or)'>Orange</b> = bull run · <b style='color:var(--rd)'>Red</b> = market bleeding (top → bottom) · <b style='color:var(--gr)'>Green</b> = recovery.")}</p>
   <p>${L("🔴 Top = khatar, halka dhiig-baxu ka bilaabmo. 🟢 Bottom = fursad, halka dhiig-baxu ku dhammaado.","🔴 Top = danger, where the bleeding starts. 🟢 Bottom = opportunity, where the bleeding ends.")}</p>`;}
 /* ---------- 📷 Snapshot: any card → branded PNG (16:9 friendly) for X / social ---------- */
-function ensureSnap(){document.querySelectorAll(".card").forEach(c=>{if(c.classList.contains("prose")||c.querySelector(":scope>.snapbtn"))return;
+function ensureSnap(){document.querySelectorAll(".card").forEach(c=>{if(c.classList.contains("prose")||c.closest(".home-side")||c.querySelector(":scope>.snapbtn"))return;
   const b=document.createElement("button");b.className="snapbtn";b.type="button";b.title=L("Sawir ka qaad","Save image");b.setAttribute("aria-label","snapshot");b.innerHTML="📷";c.appendChild(b);});}
 function snapMeta(card){const txt=q=>{const n=card.querySelector(q);return n?n.textContent.trim():"";};
   if(card.id==="clockCard"||card.classList.contains("cm")){const b=curBlock(),n=Math.floor(b/HALVING_BLOCKS),h=(b-n*HALVING_BLOCKS)/HALVING_BLOCKS*24,[ph,col]=phaseOf(h,true);
@@ -1512,7 +1547,7 @@ const CD=[];
 function renderDash(){
   const b=curBlock(),n=Math.floor(b/HALVING_BLOCKS),base=n*HALVING_BLOCKS,h=(b-base)/HALVING_BLOCKS*24;
   const hms=halvingMs(n),days=(nowMs()-hms)/DAY,[ph,col]=phaseOf(h,true),F=forecast();
-  $("clock").innerHTML=spiralSVG();renderBotMeter();$("clock").classList.toggle("clk-mini",window.matchMedia("(max-width:700px)").matches);
+  $("clock").innerHTML=spiralSVG();renderBotMeter();try{renderSide();}catch(e){console.error(e)}$("clock").classList.toggle("clk-mini",window.matchMedia("(max-width:700px)").matches);
   $("fClock").textContent=`${L("Saacad","Time")} = (${nf(b)} − ${nf(base)}) ÷ 210,000 × 24 = ${h.toFixed(2)} → ${hm(h)}`;
   $("clkLeg").innerHTML="";
   $("clock").onclick=()=>clockModal(true);renderClockModal();
