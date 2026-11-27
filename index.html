@@ -433,6 +433,25 @@ html.nav-c2 nav.tabs{display:none}html.nav-c2 #menuBtn{display:grid}html.nav-c2 
 .sd-ev i{width:10px;height:10px;border-radius:50%;flex:none}.sd-ev b{display:block;font-size:14px}.sd-ev span{font-size:12px;color:var(--mu)}
 .sd-x{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--tx)}.sd-x img{width:46px;height:46px;border-radius:50%;border:3px solid #F7931A;box-shadow:0 0 14px rgba(247,147,26,.5);object-fit:cover;background:#fff}
 .sd-x b{display:flex;gap:6px;align-items:center;color:var(--or);font-size:16px}.sd-x span{font-size:12.5px;color:var(--mu)}
+
+.layers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.layers button{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:transparent;color:var(--mu);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer;transition:.15s}
+.layers button i{width:10px;height:10px;border-radius:50%;background:var(--c);opacity:.35}
+.layers button.on{color:var(--tx);border-color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}.layers button.on i{opacity:1}
+.layers button.lx{border-style:dashed}.layers button:hover{color:var(--tx)}
+
+.lyr-w{position:relative}
+.lyr-btn{border:1px solid var(--line);background:var(--card2);color:var(--tx);border-radius:10px;padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.lyr-btn b{color:var(--or);margin-left:2px}.lyr-w.open .lyr-btn{border-color:var(--or)}
+.lyr-pop{display:none;position:absolute;right:0;top:calc(100% + 6px);z-index:30;min-width:230px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.lyr-w.open .lyr-pop{display:block}
+.lyr-h{margin:2px 6px 8px;font-size:11.5px;color:var(--mu);font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.lyr-row{display:flex;align-items:center;gap:10px;padding:8px 8px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;user-select:none}
+.lyr-row:hover{background:var(--card2)}.lyr-row input{display:none}
+.lyr-row .box{width:20px;height:20px;border-radius:6px;border:2px solid var(--mu2);display:grid;place-items:center;font-size:13px;font-weight:900;color:transparent;flex:none}
+.lyr-row input:checked+.box{background:var(--or);border-color:var(--or);color:#111}
+.lyr-row i{width:12px;height:3px;border-radius:2px;background:var(--c);flex:none}
+.lyr-f{display:flex;gap:8px;border-top:1px solid var(--line);margin-top:6px;padding-top:8px}.lyr-f button{flex:1;border:1px solid var(--line);background:transparent;color:var(--tx);border-radius:8px;padding:6px;font-size:12.5px;font-weight:700;cursor:pointer}
 </style>
 </head>
 <body>
@@ -481,9 +500,8 @@ html.nav-c2 nav.tabs{display:none}html.nav-c2 #menuBtn{display:grid}html.nav-c2 
   <p class="lead" data-t="cy_lead">Wareeg kasta: halving → top (~536 maalmood) → bottom (~919 maalmood) → halving xiga. Charts-ka farta ku wareeji, labada farna ku weynee.</p>
   <div class="card">
     <div class="ch"><div><p class="ct" data-t="t_wk">Qiimaha – weekly</p><p class="cs" data-t="t_wk_s">Shumac kasta = hal toddobaad · trend iyo sagxadda bottom-ka</p></div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><div class="seg" id="rangeSeg"><button data-r="all" class="on">All</button><button data-r="8">8Y</button><button data-r="4">4Y</button><button data-r="1">1Y</button></div><div class="seg" id="logSeg"><button data-l="1" class="on">Log</button><button data-l="0">Lin</button></div></div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><div class="seg" id="rangeSeg"><button data-r="all" class="on">All</button><button data-r="8">8Y</button><button data-r="4">4Y</button><button data-r="1">1Y</button></div><div class="seg" id="logSeg"><button data-l="1" class="on">Log</button><button data-l="0">Lin</button></div><div class="lyr-w"><button class="lyr-btn" id="wkLyrBtn" type="button">☰ <span id="wkLyrLbl">Lakabyada</span> <b id="wkLyrN"></b></button><div class="lyr-pop" id="wkLayers"></div></div></div></div>
     <div class="chart" id="chWeekly"></div>
-    <div class="legend"><span><i style="background:var(--gr)"></i><span data-t="lg_up">Toddobaad kor</span></span><span><i style="background:var(--rd)"></i><span data-t="lg_dn">Toddobaad hoos</span></span><span><i style="background:#cbd5e1"></i>Trend</span><span><i style="background:var(--gr);opacity:.6"></i><span data-t="lg_floor">Sagxad (×0.5)</span></span><span><i style="background:var(--or)"></i>Halving</span></div>
   </div>
   <div class="card" style="margin-top:16px">
     <div class="ch"><div><p class="ct" data-t="t_dd">Inta uu ka hooseeyo ATH</p><p class="cs" data-t="t_dd_s">Top kasta = 0%. Bottom-yadu way yaraanayaan (xiritaanka toddobaadka).</p></div></div>
@@ -1799,6 +1817,8 @@ function eventMarkers(){const m=[];
   for(const c of M.ev){m.push({time:toT(monday(c.top.t)),position:"aboveBar",color:cssv("--rd"),shape:"arrowDown",text:"Top "+usdK(c.top.p)});
     if(c.bot.t>c.top.t)m.push({time:toT(monday(c.bot.t)),position:"belowBar",color:cssv("--gr"),shape:"arrowUp",text:"Low "+usdK(c.bot.p)+(c.bot.prov?"*":"")});}
   return m.sort((a,b)=>a.time-b.time);}
+const WKL_DEF=[["tr","Trend","Trend","#cbd5e1"],["fl","Sagxad","Floor","var(--gr)"],["ath","ATH","ATH","var(--tx)"],["ld","ATH×0.79","ATH×0.79","var(--pu)"],["cf","Xaqiijin","Confirm","var(--or)"],["lo","Low","Low","var(--gr)"],["hv","Halving","Halving","var(--or)"],["ev","Top / Low","Top / Low","var(--rd)"],["fc","Saadaal (~)","Forecast (~)","var(--mu)"]];
+let WKL=(()=>{const d={tr:true,fl:true,ath:false,ld:false,cf:true,lo:true,hv:true,ev:true,fc:false};try{return Object.assign(d,JSON.parse(localStorage.getItem("booska_wkl")||"{}"));}catch(e){return d;}})();
 function mkWeekly(){if(charts.wk)return;const c=LW.createChart($("chWeekly"),{...baseOpts(),rightPriceScale:{mode:1,borderColor:cssv("--line"),scaleMargins:{top:0.06,bottom:0.04}}});
   const F=forecast();
   const tr=c.addLineSeries({color:"#cbd5e1",lineWidth:1.5,priceLineVisible:false,title:"Trend",crosshairMarkerVisible:false,lastValueVisible:false});
@@ -1806,9 +1826,22 @@ function mkWeekly(){if(charts.wk)return;const c=LW.createChart($("chWeekly"),{..
   const cs=c.addCandlestickSeries({upColor:cssv("--gr"),downColor:cssv("--rd"),borderVisible:false,wickUpColor:cssv("--gr"),wickDownColor:cssv("--rd")});
   const td=trendSeriesData(Date.UTC(2010,6,12),F.bot+120*DAY);tr.setData(td);fl.setData(td.map(p=>({time:p.time,value:p.value*M.floorR})));
   cs.setData(S.weekly.map(r=>({time:toT(r.t),open:r.o,high:r.h,low:r.l,close:r.c})));cs.setMarkers(eventMarkers());
-  for(const[p,col,tt,st]of[[S.ath,cssv("--tx"),"ATH",0],[F.botAth,cssv("--pu"),"ATH×"+M.ladder.toFixed(2),2],[S.low*CONF,cssv("--or"),L("Xaqiijin","Confirm"),2],[S.low,cssv("--gr"),"Low",0]])cs.createPriceLine({price:p,color:col,lineWidth:1,lineStyle:st,axisLabelVisible:true,title:tt});
-  tr.setMarkers([{time:toT(monday(F.h5)),position:"belowBar",color:cssv("--or"),shape:"circle",text:"~H5"},{time:toT(monday(F.top)),position:"aboveBar",color:cssv("--rd"),shape:"arrowDown",text:"~Top"}]);
-  fl.setMarkers([{time:toT(monday(F.bot)),position:"belowBar",color:cssv("--gr"),shape:"arrowUp",text:"~Low"}]);
+  const ev=eventMarkers(),fm=[{time:toT(monday(F.h5)),position:"belowBar",color:cssv("--or"),shape:"circle",text:"~H5"},{time:toT(monday(F.top)),position:"aboveBar",color:cssv("--rd"),shape:"arrowDown",text:"~Top"},{time:toT(monday(F.bot)),position:"belowBar",color:cssv("--gr"),shape:"arrowUp",text:"~Low"}].sort((a,b)=>a.time-b.time);
+  const PL=[["ath",S.ath,cssv("--tx"),"ATH",0],["ld",F.botAth,cssv("--pu"),"ATH×"+M.ladder.toFixed(2),2],["cf",S.low*CONF,cssv("--or"),L("Xaqiijin","Confirm"),2],["lo",S.low,cssv("--gr"),"Low",0]];
+  const lines={};
+  const apply=()=>{const o=WKL;tr.applyOptions({visible:o.tr});fl.applyOptions({visible:o.fl});
+    for(const[k,p,col,tt,st]of PL){if(o[k]&&!lines[k])lines[k]=cs.createPriceLine({price:p,color:col,lineWidth:1,lineStyle:st,axisLabelVisible:true,title:tt});if(!o[k]&&lines[k]){cs.removePriceLine(lines[k]);delete lines[k];}}
+    cs.setMarkers(ev.filter(m=>(o.hv||!/^H\d/.test(m.text))&&(o.ev||/^H\d/.test(m.text))));
+    tr.setMarkers(o.fc&&o.tr?fm.filter(m=>m.text!=="~Low"):[]);fl.setMarkers(o.fc&&o.fl?fm.filter(m=>m.text==="~Low"):[]);
+    try{localStorage.setItem("booska_wkl",JSON.stringify(o));}catch(e){}
+    $("wkLayers").innerHTML=`<p class="lyr-h">${L("Dooro waxa muuqanaya","Choose what to show")}</p>`+WKL_DEF.map(([k,so,en,col])=>`<label class="lyr-row" style="--c:${col}"><input type="checkbox" data-k="${k}" ${o[k]?"checked":""}><span class="box">✓</span><i></i>${L(so,en)}</label>`).join("")+`<div class="lyr-f"><button data-k="_all">${L("Dhammaan","All")}</button><button data-k="_none">${L("Nadiifi","Clear")}</button></div>`;
+    $("wkLyrLbl").textContent=L("Lakabyada","Layers");$("wkLyrN").textContent=WKL_DEF.filter(d=>o[d[0]]).length+"/"+WKL_DEF.length;};
+  $("wkLayers").onchange=e=>{const k=e.target.dataset&&e.target.dataset.k;if(!k)return;WKL[k]=e.target.checked;apply();};
+  $("wkLayers").onclick=e=>{e.stopPropagation();const b=e.target.closest("button");if(!b)return;const k=b.dataset.k;
+    if(k==="_all")WKL_DEF.forEach(d=>WKL[d[0]]=true);else if(k==="_none")WKL_DEF.forEach(d=>WKL[d[0]]=false);apply();};
+  $("wkLyrBtn").onclick=e=>{e.stopPropagation();$("wkLayers").parentElement.classList.toggle("open");};
+  document.addEventListener("click",()=>{const w=$("wkLayers");w&&w.parentElement.classList.remove("open");});
+  apply();
   c.timeScale().fitContent();charts.wk={c,cs};
   if(window.innerWidth<600){c.timeScale().setVisibleRange({from:toT(nowMs()-8*365.25*DAY),to:toT(nowMs()+180*DAY)});[...$("rangeSeg").children].forEach(x=>x.classList.toggle("on",x.dataset.r==="8"));}
   $("rangeSeg").onclick=e=>{const r=e.target.dataset.r;if(!r)return;[...e.currentTarget.children].forEach(b=>b.classList.toggle("on",b===e.target));
