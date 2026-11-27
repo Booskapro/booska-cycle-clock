@@ -509,10 +509,7 @@ html.nav-c2 nav.tabs{display:none}html.nav-c2 #menuBtn{display:grid}html.nav-c2 
   <div class="kick" data-t="k_price">Qiimaha</div>
   <h1 data-t="pr_h">Heerarka muhiimka ah ee wareeggan</h1>
   <p class="lead" data-t="pr_lead">Halka qiimuhu ka joogo heer kasta. Lambarrada si toos ah ayay isu cusboonaysiiyaan.</p>
-  <div class="grid g2">
-    <div class="card"><div class="ch"><div><p class="ct" data-t="t_lad">Jaranjarada qiimaha</p><p class="cs" data-t="t_lad_s">Heerarka, sare ilaa hoos (miisaan log)</p></div></div><div class="ladder" id="ladder"></div></div>
-    <div class="card"><div class="ch"><div><p class="ct" data-t="t_lv">Heerarka chart-ka</p><p class="cs" data-t="t_lv_s">Qiimaha 2 sano ee u dambeeyay + heerarka</p></div></div><div class="chart" id="chLevels" style="height:420px"></div></div>
-  </div>
+  <div class="card"><div class="ch"><div><p class="ct" data-t="t_lv">Heerarka chart-ka</p><p class="cs" data-t="t_lv_s">Qiimaha 2 sano ee u dambeeyay + heerarka</p></div></div><div class="chart" id="chLevels" style="height:520px"></div></div>
   <div class="grid g4" style="margin-top:16px" id="lvCards"></div>
   <div class="warn" style="margin-top:16px" id="prWarn">–</div>
 </section>
@@ -1470,7 +1467,7 @@ function snapMeta(card){const txt=q=>{const n=card.querySelector(q);return n?n.t
   if(card.id==="priceCard")return{tag:`BTC / USD · ${L("hadda","now")}`,head:[[L("Qiimaha Bitcoin","Bitcoin price"),null]]};
   if(card.classList.contains("cd")){const bs=card.querySelectorAll(".cdh .bd"),c=getComputedStyle(card).getPropertyValue("--c").trim();
     return{tag:L("Wareegga Bitcoin · saadaal","Bitcoin cycle · forecast"),head:[[(bs[0]?bs[0].textContent.trim():"")+": ",c||null],[txt(".cdd"),null]]};}
-  return{tag:L("Booska · hadda","Booska · now"),head:[[txt(".ct")||"Booska Cycle Clock",null]]};}
+  return{tag:"",head:[[txt(".ct")||"Booska Cycle Clock",null]]};}
 async function svgCanvas(svg,w){const cs=getComputedStyle(document.body);
   svg=svg.replace(/var\((--[\w-]+)\)/g,(m,k)=>cs.getPropertyValue(k).trim()||"#888").replace("<svg ",`<svg width="${w}" height="${(()=>{const m=/viewBox="([\d.\s-]+)"/.exec(svg);if(!m)return w;const v=m[1].trim().split(/\s+/).map(Number);return Math.round(w*v[3]/v[2]);})()}" font-family="${cs.fontFamily.replace(/"/g,"'")}" `);
   const url=URL.createObjectURL(new Blob([svg],{type:"image/svg+xml"}));
@@ -1491,8 +1488,8 @@ async function snapCard(card,btn){
     const g=x.createLinearGradient(0,H,W,0);g.addColorStop(0,"#090d16");g.addColorStop(.55,"#0d1626");g.addColorStop(1,"#14324c");x.fillStyle=g;x.fillRect(0,0,W,H);
     // top line: ● TAG · date
     const d=new Date(),ty=P+4;x.textBaseline="middle";
-    x.fillStyle="#22c55e";x.beginPath();x.arc(P+11,ty,11,0,7);x.fill();
-    x.font=`800 34px ${F}`;x.fillStyle="#b9c2d0";x.textAlign="left";if("letterSpacing" in x)x.letterSpacing="6px";x.fillText(meta.tag.toUpperCase(),P+40,ty);if("letterSpacing" in x)x.letterSpacing="0px";
+    if(meta.tag){x.fillStyle="#22c55e";x.beginPath();x.arc(P+11,ty,11,0,7);x.fill();
+    x.font=`800 34px ${F}`;x.fillStyle="#b9c2d0";x.textAlign="left";if("letterSpacing" in x)x.letterSpacing="6px";x.fillText(meta.tag.toUpperCase(),P+40,ty);if("letterSpacing" in x)x.letterSpacing="0px";}
     x.textAlign="right";x.font=`500 32px ${F}`;x.fillStyle="#9aa4b2";x.fillText(`${dstr(d.getTime())}, ${String(d.getUTCHours()).padStart(2,"0")}:${String(d.getUTCMinutes()).padStart(2,"0")} UTC`,W-P,ty);
     // headline
     let hs=tall?78:96;x.textAlign="left";const hy=ty+(tall?110:130);
@@ -1502,6 +1499,7 @@ async function snapCard(card,btn){
     const top=hy+hs*0.75,foot=tall?150:170,aw=W-2*P,ah=H-top-foot,sc=Math.min(aw/png.width,ah/png.height),dw=png.width*sc,dh=png.height*sc,rx=(W-dw)/2,ry=top+(ah-dh)/2,r=40;
     const rr=(a,b,w,h,r)=>{x.beginPath();x.roundRect?x.roundRect(a,b,w,h,r):x.rect(a,b,w,h);};
     if(meta.clock){x.drawImage(png,rx,ry,dw,dh);}else{x.save();rr(rx,ry,dw,dh,r);x.clip();x.drawImage(png,rx,ry,dw,dh);x.restore();
+    if(!card.querySelector("canvas")){x.save();x.globalAlpha=.07;x.fillStyle="#ffffff";x.textAlign="center";x.textBaseline="middle";let wf=Math.min(dw*.11,110);x.font=`800 ${wf}px ${F}`;while(x.measureText("Booska Cycle Clock").width>dw*.8&&wf>20){wf-=4;x.font=`800 ${wf}px ${F}`;}x.fillText("Booska Cycle Clock",rx+dw/2,ry+dh/2);x.restore();}
     x.strokeStyle="rgba(255,255,255,.08)";x.lineWidth=3;rr(rx,ry,dw,dh,r);x.stroke();}
     // footer
     const fy=H-foot/2+10;x.strokeStyle="rgba(255,255,255,.10)";x.lineWidth=2;x.beginPath();x.moveTo(P,H-foot+20);x.lineTo(W-P,H-foot+20);x.stroke();
@@ -1663,7 +1661,7 @@ function renderPrice(){
   for(const[v,v2,nm,c,now]of lv){let y=Y(v);if(y-last<6.2)y=last+6.2;last=y;
     if(v2)s+=`<div class="range" style="top:${Y(v)}%;height:${Y(v2)-Y(v)}%;background:${c}"></div>`;
     s+=`<div class="lv${now?" now":""}" style="top:${y}%"><i style="background:${c}"></i><span class="n" style="${now?"color:"+c:""}">${nm}</span><span class="p" style="color:${c}">${v2?usdK(v2)+" – "+usdK(v):usd(v)}</span></div>`;}
-  $("ladder").innerHTML=s;
+  ($("ladder")||{}).innerHTML=s;
   const cards=[["Trend",`10^(${M.pl.a.toFixed(3)} + ${M.pl.b.toFixed(3)} × log h)`,`h = ${nf(b)} ÷ 210,000 = ${(b/HALVING_BLOCKS).toFixed(3)} · R² ${M.pl.r2.toFixed(3)}`,usd(tr),"#94a3b8"],
     [L("Sagxadda bottom","Bottom floor"),`Trend × ${M.floorR.toFixed(3)}`,`${usd(tr)} × ${M.floorR.toFixed(3)}`,usd(fl),"var(--gr)"],
     [L("Xaqiijin","Confirmation"),`Low × ${CONF.toFixed(2)}`,`${usd(S.low)} × ${CONF.toFixed(2)}`,usd(tg),"var(--or)"],
@@ -1793,7 +1791,7 @@ function setupCalc(){
 
 /* ---------------- charts ---------------- */
 const charts={};const LW=window.LightweightCharts;
-function baseOpts(){return{autoSize:true,watermark:{visible:true,text:"@Booskapro",fontSize:15,color:"rgba(247,147,26,0.22)",horzAlign:"left",vertAlign:"top"},layout:{background:{type:"solid",color:"transparent"},textColor:cssv("--mu"),fontFamily:cssv("--font"),attributionLogo:false},
+function baseOpts(){return{autoSize:true,watermark:{visible:true,text:"Booska Cycle Clock",fontSize:30,color:isLight()?"rgba(17,24,39,0.07)":"rgba(255,255,255,0.07)",horzAlign:"center",vertAlign:"center"},layout:{background:{type:"solid",color:"transparent"},textColor:cssv("--mu"),fontFamily:cssv("--font"),attributionLogo:false},
   grid:{vertLines:{color:cssv("--line")},horzLines:{color:cssv("--line")}},rightPriceScale:{borderColor:cssv("--line")},timeScale:{borderColor:cssv("--line"),minBarSpacing:0.01},
   crosshair:{mode:0},handleScroll:{vertTouchDrag:false},localization:{priceFormatter:p=>p>=1000?"$"+nf(p):p>=1?"$"+p.toFixed(2):"$"+p.toFixed(3)}};}
 const toT=ms=>Math.floor(ms/1000);
@@ -1889,7 +1887,7 @@ function pcMarkup(full){return`<div class="pw-h"><div class="pw-t"><span class="
   <div class="pw-ch"><div class="pw-chart"></div><div class="pw-tip"></div><div class="pw-hi"></div><div class="pw-lo"></div></div>
   ${full?"":`<button class="pw-exp" aria-label="open">⤢</button>`}<div class="pw-r">${RANGES.map(r=>`<button data-r="${r.k}" class="${PC.range===r.k?"on":""}">${L(r.so,r.en)}</button>`).join("")}</div><div class="pw-n cs"></div>`;}
 function pcMount(el,full){el.innerHTML=pcMarkup(full);const ch=el.querySelector(".pw-chart");
-  const c=LW.createChart(ch,{autoSize:true,watermark:{visible:full||!window.matchMedia("(max-width:700px)").matches,text:"@Booskapro",fontSize:13,color:"rgba(247,147,26,0.25)",horzAlign:"left",vertAlign:"top"},layout:{background:{type:"solid",color:"transparent"},textColor:cssv("--mu"),attributionLogo:false,fontFamily:cssv("--font")},
+  const c=LW.createChart(ch,{autoSize:true,watermark:{visible:true,text:"Booska Cycle Clock",fontSize:full?30:20,color:isLight()?"rgba(17,24,39,0.07)":"rgba(255,255,255,0.07)",horzAlign:"center",vertAlign:"center"},layout:{background:{type:"solid",color:"transparent"},textColor:cssv("--mu"),attributionLogo:false,fontFamily:cssv("--font")},
     grid:{vertLines:{visible:false},horzLines:{visible:false}},rightPriceScale:{visible:false,scaleMargins:{top:0.16,bottom:0.1}},leftPriceScale:{visible:false},
     timeScale:{visible:false,borderVisible:false,fixLeftEdge:true,fixRightEdge:true},handleScroll:false,handleScale:false,
     crosshair:{mode:1,vertLine:{color:"#8a8f99",width:1,style:2,labelVisible:false},horzLine:{visible:false,labelVisible:false}},trackingMode:{exitMode:0}});
