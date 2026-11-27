@@ -1,4 +1,4 @@
-// Booska Cycle Clock · archive robot · @Booskapro · CC BY 4.0
+// Booska Cycle Clock · archive robot · @Booskapro · © All rights reserved
 // Runs every 10 minutes in GitHub Actions. It never deletes data:
 //  - weekly.json   : weekly candles (closes) – new weeks are appended, old weeks are never removed
 //  - events.json   : halvings, tops, bottoms (suspected → confirmed; revisions kept)

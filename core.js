@@ -1,5 +1,5 @@
 "use strict";
-/* ===================== Booska Cycle Clock · core engine · @Booskapro · CC BY 4.0 =====================
+/* ===================== Booska Cycle Clock · core engine · @Booskapro · © All rights reserved =====================
    Shared by the website (browser) and the archive robot (GitHub Action, Node). No DOM in this file. */
 const DAY=864e5, HALVING_BLOCKS=210000;
 const HALV=[{b:0,t:Date.UTC(2009,0,3,18,15,5)}]; // filled from the event log (exact halving block times)
@@ -30,7 +30,7 @@ const T={so:{
  terms_t:"<h3>Terms</h3><p><b>Waxbarasho keliya.</b> Wax kasta oo halkan ku jira waa macluumaad iyo waxbarasho – ma aha talo maaliyadeed, maalgashi ama canshuur.</p><p><b>Saxnaanta.</b> Xogta waxaa laga keenaa ilo dadweyne; way daahi kartaa, dhiman kartaa ama qaldami kartaa. Saadaasha waa qaab taariikheed, ma aha ballan.</p><p><b>Damaanad ma jirto.</b> Adeegga waxaa la bixiyaa sida uu yahay. Khasaare kasta oo ka yimaada isticmaalka xogtan mas'uul kama nihin.</p><p>Su'aalo: <a href='https://x.com/Booskapro' target='_blank' rel='noopener'>@Booskapro</a></p>",
  live:"Live",offline:"Xog kaydsan",cm_s:"Labo far ku weynee · dhibic kasta waa top ama bottom wareeg hore",go_now:"Hadda",k_time:"Waqtiga wareegga Bitcoin",clk_s:"Gacanta = maanta (block-ga live ah) · 24 saac = hal wareeg",tl_t:"Jadwalka wareegyada",tl_s:"",feed_t:"Dhacdooyinka u dambeeyay",feed_s:"",ct_t:"Waqtiga wareeg kasta",ct_s:"Maalmaha halving kaddib iyo saacadda wareegga",
  n_arch:"Kaydka",ar_h:"Diiwaanka live ah – waxba lama tirtiro",ar_lead:"Block kasta iyo qiime kasta waa la hubiyaa. Dhacdo kasta (halving, top, bottom) isla markiiba way is calaamadaysaa, robot-ka kaydkuna (GitHub Actions) 10 daqiiqo kasta ayuu xogta ku kaydiyaa – sannado kaddib waa la heli karaa.",
- ar_ev:"Dhammaan dhacdooyinka",ar_ev_s:"",ar_day:"Raadi maalin",ar_day_s:"Dooro taariikh – arag xogtii iyo saadaashii maalintaas.",ar_dl:"Soo deji xogta",ar_dl_s:"Xogta oo dhan waa furan (CC BY 4.0). Excel ama Python ku fur.",
+ ar_ev:"Dhammaan dhacdooyinka",ar_ev_s:"",ar_day:"Raadi maalin",ar_day_s:"Dooro taariikh – arag xogtii iyo saadaashii maalintaas.",ar_dl:"Soo deji xogta",ar_dl_s:"Xogta waa la soo dejisan karaa si shakhsi ah · © Booska Cycle Clock. Excel ama Python ku fur.",
  ar_led:"Saadaasha maalin kasta (forecast ledger)",ar_led_s:"Sida saadaashu isu beddeshay maalin kasta – caddayn aan la beddeli karin.",
  es_confirmed:"La xaqiijiyay",es_suspected:"La tuhunsan yahay",es_broken:"La jebiyay",ev_conf:"Xaqiijin",ev_first:"Low koowaad",ev_rel:"Relief",ev_local:"Live · wali lama kaydin",n_sig:"Signal",
  fd_k:"Aasaasaha",fd_role:"Cilmi-baare crypto · Aasaasaha Booska Cycle Clock",fd_by:"Aasaasaha",fd_btn:"Raac @Booskapro →",
@@ -66,7 +66,7 @@ const T={so:{
  terms_t:"<h3>Terms</h3><p><b>Education only.</b> Everything here is information and education – not financial, investment or tax advice.</p><p><b>Accuracy.</b> Data comes from public sources and may be delayed, missing or wrong. Forecasts are a historical pattern, not a promise.</p><p><b>No warranty.</b> The service is provided as is. We are not liable for losses from using this data.</p><p>Questions: <a href='https://x.com/Booskapro' target='_blank' rel='noopener'>@Booskapro</a></p>",
  live:"Live",offline:"Cached data",cm_s:"Pinch to zoom · each dot is a past top or bottom",go_now:"Now",k_time:"Bitcoin cycle time",clk_s:"Hand = today (live block) · 24 hours = one cycle",tl_t:"Cycle timeline",tl_s:"",feed_t:"Latest events",feed_s:"",ct_t:"Timing of every cycle",ct_s:"Days after halving and the cycle clock time",
  n_arch:"Archive",ar_h:"Live record – nothing is deleted",ar_lead:"Every block and every price is checked. Each event (halving, top, bottom) marks itself instantly, and the archive robot (GitHub Actions) saves the data every 10 minutes – available years from now.",
- ar_ev:"All events",ar_ev_s:"",ar_day:"Look up a day",ar_day_s:"Pick a date – see that day's data and forecast.",ar_dl:"Download the data",ar_dl_s:"All data is open (CC BY 4.0). Open it in Excel or Python.",
+ ar_ev:"All events",ar_ev_s:"",ar_day:"Look up a day",ar_day_s:"Pick a date – see that day's data and forecast.",ar_dl:"Download the data",ar_dl_s:"Data can be downloaded for personal use · © Booska Cycle Clock. Open it in Excel or Python.",
  ar_led:"Daily forecast ledger",ar_led_s:"How the forecast changed each day – a record that cannot be altered.",
  es_confirmed:"Confirmed",es_suspected:"Suspected",es_broken:"Broken",ev_conf:"Confirmation",ev_first:"First low",ev_rel:"Relief",ev_local:"Live · not archived yet",n_sig:"Signal",
  fd_k:"Founder",fd_role:"Crypto researcher · Founder of Booska Cycle Clock",fd_by:"Founded by",fd_btn:"Follow @Booskapro →",
