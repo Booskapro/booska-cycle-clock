@@ -412,9 +412,11 @@ html.snapping .snapbtn{visibility:hidden}
 html.theme-anim *{transition:background-color .35s,color .35s,border-color .35s!important}
 /* roomier header with Maalgashi + theme button */
 .livebar .lt{white-space:nowrap}
-@media (max-width:1500px){.livebar .lt{display:none}nav.tabs a{padding:8px 10px}}
-@media (max-width:1320px){nav.tabs{display:none}#menuBtn{display:grid}.hbtns{margin-left:auto}}
 @media (max-width:520px){.livebar{display:none}.bname{font-size:15px}.bsub{display:none}#themeBtn{min-width:36px;padding:6px 8px}#langBtn{padding:6px 9px}}
+
+.brand{flex:none}.hbtns{flex:none}nav.tabs{min-width:0;overflow:hidden;flex-wrap:nowrap}nav.tabs a{white-space:nowrap}
+html.nav-c1 .livebar .lt{display:none}html.nav-c1 nav.tabs a{padding:8px 9px}
+html.nav-c2 nav.tabs{display:none}html.nav-c2 #menuBtn{display:grid}html.nav-c2 .hbtns{margin-left:auto}
 </style>
 </head>
 <body>
@@ -1260,6 +1262,11 @@ function clockSVG(mode,big,clean){mode=mode||CLK_MODE;
   s+=`<text x="${C}" y="450" text-anchor="middle" font-size="14" fill="var(--tx)">#${nf(b)}</text></svg>`;
   return s;}
 let CLK_MODE="simple",CLKM="history";
+function fitNav(){const r=document.documentElement,t=$("tabs"),b=document.querySelector(".brand");if(!t||!b)return;
+  r.classList.remove("nav-c1","nav-c2");if(getComputedStyle(t).display==="none")return;
+  const ov=()=>t.scrollWidth>t.clientWidth+1||b.getBoundingClientRect().right>t.getBoundingClientRect().left-6;
+  if(ov())r.classList.add("nav-c1");if(ov())r.classList.add("nav-c2");}
+addEventListener("resize",()=>{clearTimeout(fitNav._t);fitNav._t=setTimeout(fitNav,120);});
 function isLight(){const a=document.documentElement.getAttribute("data-theme");return a?a==="light":matchMedia("(prefers-color-scheme: light)").matches;}
 function themeIcon(){const b=$("themeBtn");if(b){b.textContent=isLight()?"🌙":"☀️";b.title=isLight()?L("Habeen","Dark mode"):L("Maalin","Light mode");}
   const m=document.querySelector('meta[name="theme-color"]');m&&m.setAttribute("content",isLight()?"#F5F6F8":"#0B0E14");}
@@ -1900,7 +1907,7 @@ function route(){let p=(location.hash||"#saacadda").slice(1);if(!PAGES.includes(
   requestAnimationFrame(()=>{try{
     if(p==="saacadda")mkPrice();if(p==="wareegyada"){mkWeekly();mkDD();mkOv();}if(p==="qiimaha")mkLevels();if(p==="qaacidada")mkOsc();
   }catch(e){console.error(e);}});}
-function renderAll(){try{buildModel();renderLive();renderDash();renderCycles();renderPrice();renderSignal();renderFormulas();renderAbout();renderHowClock();renderArchive();runCalc();renderInvest();}catch(e){console.error(e);}}
+function renderAll(){try{buildModel();renderLive();renderDash();renderCycles();renderPrice();renderSignal();renderFormulas();renderAbout();renderHowClock();renderArchive();runCalc();renderInvest();fitNav();}catch(e){console.error(e);}}
 function rebuildCharts(){for(const w of PC.W){try{w.c.remove();}catch(e){}}PC.W=[];for(const k of Object.keys(charts)){try{charts[k].c.remove();}catch(e){}delete charts[k];}
   document.querySelectorAll(".band").forEach(b=>b.remove());route();}
 async function tick(full){
