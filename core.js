@@ -9,7 +9,7 @@ const SNAP={block:977195,tBlock:Date.UTC(2026,10,23,11,25),price:61309,tPrice:Da
 /* ---------------- i18n ---------------- */
 const MON={so:["Jan","Feb","Mar","Abr","Mey","Jun","Lul","Ogo","Sep","Okt","Nov","Dis"],en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]};
 const T={so:{
- tagline:"Wareegga Bitcoin · Live",n_clock:"Waqtiga",n_inv:"Maalgashi",n_cycles:"Wareegyada",n_price:"Qiimaha",n_calc:"Xisaabiye",n_form:"Moodeelada",n_about:"Ku saabsan",n_priv:"Privacy",n_terms:"Terms",nfa:"Ma aha talo maaliyadeed",more:"Fiiri →",
+ tagline:"Wareegga Bitcoin · Live",n_clock:"Waqtiga",n_inv:"Maalgashi",vid_t:"Muuqaalka: sida Booska u shaqeeyo",vid_s:"76 ilbiriqsi · qaacidada, saacadda iyo sida loo isticmaalo",vid_l:"▶ Muuqaal",n_cycles:"Wareegyada",n_price:"Qiimaha",n_calc:"Xisaabiye",n_form:"Moodeelada",n_about:"Ku saabsan",n_priv:"Privacy",n_terms:"Terms",nfa:"Ma aha talo maaliyadeed",more:"Fiiri →",
  k_clock:"Saacadda wareegga",c_time:"Saacadda",c_date:"Taariikh",c_phase:"Xilliga",s_price:"Qiimaha BTC",s_halv:"Halving 5",
  t_where:"Halka wareegga la joogo",t_fc:"Saadaasha Booska",t_fc_s:"Qaacidooyin furan · ma aha ballan",fc_note:"",
  t_conf:"Xaqiijinta bottom-ka",t_conf_s:"Weekly close > Low × 1.20",t_pc:"Qiimaha iyo sagxadda",t_pc_s:"Buluug = qiimaha · cad = trend · cagaar = sagxadda bottom-ka (trend × 0.5)",
@@ -45,7 +45,7 @@ const T={so:{
  x_badge:"Xog",q_badge:"Qiyaas",
  ph_rise:"Kor-u-kac",ph_top:"Aagga TOP",ph_fall:"Hoos-u-dhac",ph_bot:"Aagga BOTTOM",ph_rec:"Soo kabasho",
 },en:{
- tagline:"Bitcoin cycle · Live",n_clock:"Time",n_inv:"Invest",n_cycles:"Cycles",n_price:"Price",n_calc:"Calculator",n_form:"Models",n_about:"About",n_priv:"Privacy",n_terms:"Terms",nfa:"Not financial advice",more:"Open →",
+ tagline:"Bitcoin cycle · Live",n_clock:"Time",n_inv:"Invest",vid_t:"Video: how Booska works",vid_s:"76 seconds · the formula, the clock and how to use it",vid_l:"▶ Video",n_cycles:"Cycles",n_price:"Price",n_calc:"Calculator",n_form:"Models",n_about:"About",n_priv:"Privacy",n_terms:"Terms",nfa:"Not financial advice",more:"Open →",
  k_clock:"Cycle clock",c_time:"Cycle time",c_date:"Date",c_phase:"Phase",s_price:"BTC price",s_halv:"Halving 5",
  t_where:"Where we are in the cycle",t_fc:"Booska forecast",t_fc_s:"Open formulas · not a promise",fc_note:"",
  t_conf:"Bottom confirmation",t_conf_s:"Weekly close > Low × 1.20",t_pc:"Price and floor",t_pc_s:"Blue = price · white = trend · green = bottom floor (trend × 0.5)",
